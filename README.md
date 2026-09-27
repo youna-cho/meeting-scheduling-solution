@@ -2,7 +2,7 @@
 
 A meeting scheduling product that recommends suitable meeting times by combining participant availability, preferred times, and priority.
 
-**[View Live Demo →](https://meeting-scheduling-prod.netlify.app/)**
+**[View Live Demo →](https://tosschallenge-choyoona.netlify.app/)**
 
 ---
 
