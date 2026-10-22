@@ -92,14 +92,6 @@ Open Link → Review Candidate Times → Mark Preferred / Available / Unavailabl
 
 ---
 
-## Prototype
-
-The high-fidelity design was developed into a functional web prototype.
-
-**[Open Live Prototype →](https://meeting-scheduling-prod.netlify.app/)**
-
----
-
 ## Limitations
 
 - User interviews were conducted with **5 participants**
