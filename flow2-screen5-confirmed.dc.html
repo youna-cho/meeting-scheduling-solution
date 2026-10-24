@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fastly.jsdelivr.net">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard','Pretendard Variable',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{min-width:1440px;background:#FBFCFE}
+a{color:#0064FF;text-decoration:none}a:hover{color:#0052cc}
+.frame{width:1440px;height:900px;position:relative;overflow:hidden;background:#FBFCFE;margin:0 auto}
+.aurora{position:absolute;inset:0;pointer-events:none}
+.a-bloom{position:absolute;left:50%;bottom:-460px;transform:translateX(-50%);width:1480px;height:720px;border-radius:50%;background:radial-gradient(50% 60% at 50% 60%,#ffffff 0%,#dce9ff 40%,#93b9ff 64%,#4d8bff 82%,transparent 100%);filter:blur(58px);opacity:.3}
+.a-bloom2{position:absolute;left:15%;top:-220px;width:600px;height:500px;border-radius:50%;background:radial-gradient(circle,#8fbcff3d,transparent 70%);filter:blur(64px)}
+.a-bloom3{position:absolute;right:12%;top:-180px;width:520px;height:460px;border-radius:50%;background:radial-gradient(circle,#bcd4ff38,transparent 70%);filter:blur(64px)}
+.a-veil{position:absolute;inset:0;background:linear-gradient(180deg,#fbfcfeee 0%,#fbfcfe66 34%,transparent 58%)}
+.scroll{position:absolute;inset:0;overflow-y:auto;scroll-behavior:smooth}
+.stage{max-width:680px;margin:0 auto;padding:150px 32px 150px;display:flex;flex-direction:column;align-items:center;position:relative}
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:11px}
+.check{width:60px;height:60px;border-radius:50%;background:#12a150;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 32px -12px #12a15077,0 0 0 9px #12a15014}
+.check svg{width:31px;height:31px;color:#fff}
+.h-title{font-size:23px;font-weight:800;letter-spacing:-.02em;color:#191F28;margin-top:6px}
+.h-time{font-size:36px;font-weight:800;letter-spacing:-.03em;color:#0064FF;line-height:1.15;margin-top:2px}
+.card{margin-top:38px;width:100%;background:#fff;border:1px solid #eef1f5;border-radius:22px;box-shadow:0 22px 60px -22px #10357528,0 4px 14px #10357510;padding:26px 28px}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.mtitle{font-size:20px;font-weight:800;letter-spacing:-.02em;color:#191F28;line-height:1.35}
+.chip{flex-shrink:0;padding:6px 12px;border-radius:8px;background:#FBEAE7;color:#C6483A;font-size:13px;font-weight:700}
+.plist{display:flex;flex-direction:column;gap:6px;flex:1;min-width:0}
+.pgroup{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.npill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#4E5968;background:#FFFFFF;border:1px solid #E5EAF0;border-radius:12px;padding:4px 11px}
+.host-mini{font-size:10.5px;font-weight:700;color:#6b7684;background:#f4f6f8;border:1px solid #d3d9e0;padding:1px 6px;border-radius:5px}
+.pg-lab{font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:5px;flex-shrink:0;align-self:center}
+.pg-lab.req{background:#eef4ff;color:#0064FF}
+.pg-lab.opt{background:#f1f3f6;color:#6b7684}
+.pg-names{font-size:14px;font-weight:600;color:#333d4b;line-height:1.5}
+.host-inline{font-size:10.5px;font-weight:700;color:#8b95a1;background:#fff;border:1px solid #e1e6ec;padding:1px 6px;border-radius:5px;margin-left:4px;vertical-align:middle}
+.agenda{margin-top:9px;font-size:14px;line-height:1.55;color:#6b7684;font-weight:500}
+.divider{height:1px;background:#f1f3f6;margin:19px 0}
+.meta{display:flex;flex-direction:column;gap:14px}
+.mrow{display:flex;align-items:center;gap:12px}
+.mlabel{width:64px;flex-shrink:0;font-size:13px;font-weight:600;color:#8b95a1}
+.mval{font-size:14px;font-weight:600;color:#333d4b;display:flex;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
+.av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.host-tag{font-size:11px;font-weight:700;color:#0064FF;background:#eef4ff;padding:2px 7px;border-radius:6px}
+.linkbtn{width:26px;height:26px;border-radius:8px;border:1px solid #eef1f5;background:#fff;display:flex;align-items:center;justify-content:center;color:#8b95a1;cursor:pointer;transition:all .12s;flex-shrink:0}
+.linkbtn:hover{background:#f7f8fa;color:#4e5968;border-color:#e1e6ec}
+.linkbtn svg{width:14px;height:14px}
+.follow{margin-top:20px;width:100%}
+.f-row{display:flex;align-items:center;gap:16px;padding:4px 6px}
+.f-tx{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.f-t{font-size:15px;font-weight:800;color:#191F28;letter-spacing:-.01em}
+.f-s{font-size:13px;font-weight:600;color:#8b95a1;line-height:1.5}
+.btn-write{flex-shrink:0;height:42px;padding:0 22px;border:none;border-radius:12px;background:#0064FF;color:#fff;font-family:inherit;font-size:14.5px;font-weight:700;cursor:pointer;transition:all .12s;box-shadow:0 8px 20px -10px #0064ff88}
+.btn-write:hover{background:#0052cc;transform:translateY(-1px)}
+.editor{margin-top:14px;width:100%;background:#fff;border:1px solid #eef1f5;border-radius:20px;box-shadow:0 22px 60px -22px #10357528,0 4px 14px #10357510;padding:24px 26px;display:flex;flex-direction:column;gap:16px;animation:slide .28s cubic-bezier(.2,.8,.3,1) both}
+@keyframes slide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.ed-field{display:flex;flex-direction:column;gap:8px}
+.ed-lab{font-size:13px;font-weight:700;color:#8b95a1}
+.chipfield{position:relative;display:flex;align-items:center;flex-wrap:wrap;gap:7px;border:1px solid #e1e6ec;border-radius:12px;padding:9px 11px;background:#fff;transition:border-color .12s,box-shadow .12s}
+.chipfield:focus-within{border-color:#0064FF;box-shadow:0 0 0 3px #0064ff1a}
+.rchip{display:inline-flex;align-items:center;gap:6px;padding:5px 7px 5px 11px;border-radius:9px;background:#f4f6f9;font-size:13px;font-weight:700;color:#4e5968}
+.rchip button{width:17px;height:17px;border:none;border-radius:6px;background:transparent;color:#adb5bd;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.rchip button:hover{background:#e6e9ee;color:#4e5968}
+.rchip button svg{width:11px;height:11px}
+.chipin{flex:1;min-width:130px;border:none;outline:none;font-family:inherit;font-size:13.5px;font-weight:600;color:#191F28;background:transparent;height:28px}
+.chipin::placeholder{color:#b0b8c1;font-weight:500}
+.acmenu{position:absolute;top:calc(100% + 7px);left:0;right:0;background:#fff;border:1px solid #eef1f5;border-radius:14px;box-shadow:0 16px 38px -10px #10357544,0 3px 10px #1035751a;padding:7px;z-index:20}
+.acitem{display:flex;align-items:center;gap:12px;padding:9px 11px;border-radius:11px;cursor:pointer;transition:background .1s}
+.acitem:hover{background:#f4f6f8}
+.pav2{width:32px;height:32px;border-radius:50%;color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pinfo{flex:1;min-width:0}
+.pname{font-size:14px;font-weight:700;color:#191F28}
+.pdept{font-size:12px;font-weight:500;color:#8b95a1;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acadd{margin-left:auto;font-size:12px;font-weight:700;color:#0064FF;background:#eef4ff;padding:6px 11px;border-radius:8px;flex-shrink:0}
+.acnomatch{padding:14px;text-align:center;font-size:13px;font-weight:500;color:#b0b8c1}
+.ed-input{width:100%;height:46px;border:1px solid #e1e6ec;border-radius:12px;padding:0 15px;font-family:inherit;font-size:14px;font-weight:700;color:#191F28;outline:none;transition:border-color .12s,box-shadow .12s}
+.ed-input:focus{border-color:#0064FF;box-shadow:0 0 0 3px #0064ff1a}
+.ed-body{width:100%;border:1px solid #e1e6ec;border-radius:12px;padding:15px 16px;font-family:inherit;font-size:14px;font-weight:500;color:#333d4b;line-height:1.7;min-height:220px;resize:vertical;outline:none;transition:border-color .12s,box-shadow .12s}
+.ed-body:focus{border-color:#0064FF;box-shadow:0 0 0 3px #0064ff1a}
+.ed-btns{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+.btn-fold{height:44px;padding:0 20px;border:1px solid #e1e6ec;border-radius:12px;background:#fff;color:#4e5968;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:all .12s}
+.btn-fold:hover{background:#f7f8fa}
+.btn-send{height:44px;padding:0 26px;border:none;border-radius:12px;background:#0064FF;color:#fff;font-family:inherit;font-size:14.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .12s;box-shadow:0 8px 20px -10px #0064ff88}
+.btn-send:hover{background:#0052cc;transform:translateY(-1px)}
+.btn-send svg{width:15px;height:15px}
+.toast{position:absolute;left:50%;bottom:34px;transform:translateX(-50%);background:#191F28;color:#fff;font-size:13.5px;font-weight:700;padding:12px 22px;border-radius:12px;box-shadow:0 16px 40px -12px #191f2866;animation:tin .25s cubic-bezier(.2,.8,.3,1) both;display:flex;align-items:center;gap:9px;z-index:50}
+.toast svg{width:16px;height:16px;color:#3ddc84}
+.toast-div{width:1px;height:16px;background:#ffffff2e;margin:0 2px}
+.toast-undo{border:none;background:transparent;font-family:inherit;font-size:13.5px;font-weight:700;color:#7db4ff;cursor:pointer;padding:0;letter-spacing:-.01em}
+.toast-undo:hover{color:#a9ccff;text-decoration:underline}
+@keyframes tin{from{opacity:0;transform:translateX(-50%) translateY(10px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+</style>
+</helmet>
+<div class="frame" data-screen-label="확정 완료">
+<div class="aurora"><div class="a-bloom"></div><div class="a-bloom2"></div><div class="a-bloom3"></div><div class="a-veil"></div></div>
+<div class="scroll"><div class="stage">
+<div class="hero">
+<div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+<div class="h-title">회의 시간이 확정됐어요</div>
+<div class="h-time">{{ bigTime }}</div>
+</div>
+<div class="card" style="border-color: #FFFFFF">
+<div class="card-top"><div class="mtitle">온보딩 전환율 개선 TFT 킥오프</div><span class="chip">결정</span></div>
+<p class="agenda">신규 유저 이탈 구간 분석 및 개선 우선순위 결정</p>
+<div class="divider"></div>
+<div class="meta">
+<div class="mrow" style="align-items:flex-start"><span class="mlabel" style="padding-top:1px">참여자</span><div class="plist"><div class="pgroup"><span class="pg-lab req">필수</span><span class="npill">조윤아<span class="host-mini" style="background-color: #FDFEFF; border-color: #CCE0F8; color: #6E859F">주최</span></span><span class="npill">김민준</span><span class="npill">최지우</span></div><div class="pgroup"><span class="pg-lab opt">선택</span><span class="npill">박서연</span><span class="npill">박준형</span><span class="npill">정하은</span></div></div></div>
+<div class="mrow"><span class="mlabel">장소</span><span class="mval">화상 · Google Meet<button class="linkbtn" onClick="{{ copyLink }}" title="회의 링크 복사"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 15l6-6"></path><path d="M11 6l1-1a4 4 0 0 1 6 6l-1 1"></path><path d="M13 18l-1 1a4 4 0 0 1-6-6l1-1"></path></svg></button></span></div>
+<div class="mrow"><span class="mlabel">몰입도</span><span class="mval">92%</span></div>
+</div>
+</div>
+<div class="follow" ref="{{ followRef }}">
+<div class="f-row">
+<div class="f-tx"><span class="f-t">{{ followTitle }}</span><span class="f-s">{{ followSub }}</span></div>
+<sc-if value="{{ closed }}" hint-placeholder-val="{{ true }}"><button class="btn-write" onClick="{{ toggle }}">{{ followBtn }}</button></sc-if>
+<sc-if value="{{ open }}" hint-placeholder-val="{{ false }}"><button class="btn-fold" onClick="{{ toggle }}">접기</button></sc-if>
+</div>
+<sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+<div class="editor">
+<div class="ed-field"><span class="ed-lab">수신자</span>
+<div class="chipfield">
+<sc-for list="{{ toChips }}" as="c" hint-placeholder-count="6"><span class="rchip">{{ c.name }}<button onClick="{{ c.remove }}" title="삭제"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span></sc-for>
+<input class="chipin" placeholder="이름 또는 팀으로 검색해 추가" value="{{ qTo }}" onChange="{{ setQTo }}">
+<sc-if value="{{ showAcTo }}" hint-placeholder-val="{{ false }}"><div class="acmenu"><sc-for list="{{ matchesTo }}" as="m" hint-placeholder-count="2"><div class="acitem" onClick="{{ m.add }}"><span class="pav2" style="background:{{ m.color }}">{{ m.initial }}</span><div class="pinfo"><div class="pname">{{ m.name }}</div><div class="pdept">{{ m.dept }}</div></div><span class="acadd">추가</span></div></sc-for></div></sc-if>
+<sc-if value="{{ noMatchTo }}" hint-placeholder-val="{{ false }}"><div class="acmenu"><div class="acnomatch">검색 결과가 없어요</div></div></sc-if>
+</div>
+</div>
+<div class="ed-field"><span class="ed-lab">참조</span>
+<div class="chipfield">
+<sc-for list="{{ ccChips }}" as="c" hint-placeholder-count="0"><span class="rchip">{{ c.name }}<button onClick="{{ c.remove }}" title="삭제"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span></sc-for>
+<input class="chipin" placeholder="참조할 사람을 검색해 추가" value="{{ qCc }}" onChange="{{ setQCc }}">
+<sc-if value="{{ showAcCc }}" hint-placeholder-val="{{ false }}"><div class="acmenu"><sc-for list="{{ matchesCc }}" as="m" hint-placeholder-count="2"><div class="acitem" onClick="{{ m.add }}"><span class="pav2" style="background:{{ m.color }}">{{ m.initial }}</span><div class="pinfo"><div class="pname">{{ m.name }}</div><div class="pdept">{{ m.dept }}</div></div><span class="acadd">추가</span></div></sc-for></div></sc-if>
+<sc-if value="{{ noMatchCc }}" hint-placeholder-val="{{ false }}"><div class="acmenu"><div class="acnomatch">검색 결과가 없어요</div></div></sc-if>
+</div>
+</div>
+<div class="ed-field"><span class="ed-lab">제목</span><input class="ed-input" defaultValue="[확정] 온보딩 전환율 개선 TFT 킥오프 회의 안내"></div>
+<div class="ed-field"><span class="ed-lab">본문</span><textarea class="ed-body" defaultValue="{{ emailBody }}"></textarea></div>
+<div class="ed-btns"><button class="btn-send" onClick="{{ sendMail }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3L10 14"></path><path d="M21 3l-7 18-4-7-7-4z"></path></svg>메일 보내기</button></div>
+</div>
+</sc-if>
+</div>
+</div></div>
+<sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}"><div class="toast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>{{ toastMsg }}<sc-if value="{{ toastHasUndo }}" hint-placeholder-val="{{ false }}"><span class="toast-div"></span><button class="toast-undo" onClick="{{ onUndoMail }}">되돌리기</button></sc-if></div></sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;recurrence&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;없음&quot;,&quot;매주&quot;,&quot;매달&quot;],&quot;default&quot;:&quot;없음&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Meeting&quot;}}">
+class Component extends DCLogic {
+  constructor(p){ super(p); this.followRef = React.createRef(); }
+  state = {
+    open: false, sent: false, toast: null, qTo: '', qCc: '',
+    to: [1, 2, 3, 4, 5, 6], cc: [],
+    directory: [
+      { id: 1, name: '조윤아', dept: '프로덕트본부 · 그로스팀', initial: '조', color: '#0064FF' },
+      { id: 2, name: '김민준', dept: 'ICT 개발본부 · 웹기획팀', initial: '김', color: '#4b93ff' },
+      { id: 3, name: '박서연', dept: '프로덕트본부 · 데이터팀', initial: '박', color: '#22c55e' },
+      { id: 4, name: '박준형', dept: 'ICT 개발본부 · 프론트엔드팀', initial: '박', color: '#7b61ff' },
+      { id: 5, name: '정하은', dept: '디자인센터 · 프로덕트디자인팀', initial: '정', color: '#ec4899' },
+      { id: 6, name: '최지우', dept: '프로덕트본부 · CRM팀', initial: '최', color: '#f59e0b' },
+      { id: 7, name: '한지민', dept: '프로덕트본부 · 그로스팀', initial: '한', color: '#14b8a6' },
+      { id: 8, name: '오세훈', dept: 'ICT 개발본부 · 서버팀', initial: '오', color: '#6366f1' },
+      { id: 9, name: '유다인', dept: '디자인센터 · 브랜드팀', initial: '유', color: '#f43f5e' }
+    ]
+  };
+  componentDidMount() {
+    setTimeout(() => this.toast('참여자에게 확정 알림을 보냈고, 캘린더에도 추가했어요.', false, 3200), 350);
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState.open && this.state.open) {
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const el = document.querySelector('.follow');
+        const sc = el && el.closest('.scroll');
+        if (sc) sc.scrollTo({ top: el.offsetTop - 50, behavior: 'smooth' });
+      }));
+    }
+  }
+  toast(msg, undo, dur) {
+    clearTimeout(this._tt);
+    this.setState({ toast: msg, toastUndo: !!undo });
+    this._tt = setTimeout(() => this.setState({ toast: null, toastUndo: false }), dur || (undo ? 4200 : 2200));
+  }
+  chips(key) {
+    const byId = Object.fromEntries(this.state.directory.map(d => [d.id, d]));
+    return this.state[key].map(id => ({
+      name: byId[id].name,
+      remove: () => this.setState(s => ({ [key]: s[key].filter(x => x !== id) }))
+    }));
+  }
+  matches(key, qKey) {
+    const q = this.state[qKey].trim();
+    if (!q) return [];
+    const taken = new Set([...this.state.to, ...this.state.cc]);
+    return this.state.directory
+      .filter(d => !taken.has(d.id) && (d.name.includes(q) || d.dept.includes(q)))
+      .map(d => ({
+        name: d.name, dept: d.dept, initial: d.initial, color: d.color,
+        add: () => this.setState(s => ({ [key]: [...s[key], d.id], [qKey]: '' }))
+      }));
+  }
+  renderVals() {
+    const s = this.state;
+    const recur = this.props.recurrence ?? '없음';
+    const isRecurring = recur !== '없음';
+    const recurLabel = recur === '매주' ? '매주 반복' : (recur === '매달' ? '매달 반복' : '');
+    const qTime = new URLSearchParams(window.location.search).get('time');
+    const bigTime = qTime || (recur === '매주' ? '매주 월요일 · 14:00–15:00' : (recur === '매달' ? '매달 20일 · 14:00–15:00' : '7/20 월 · 14:00–15:00'));
+    const emailTime = qTime ? qTime.replace(' · ', ' ') : (recur === '매주' ? '매주 월요일 14:00–15:00' : (recur === '매달' ? '매달 20일 14:00–15:00' : '7/20 월 14:00–15:00'));
+    const emailBody = `안녕하세요, 조윤아입니다.\n\n온보딩 전환율 개선 TFT 킥오프 회의 일정이 아래와 같이 확정되어 안내드립니다.\n\n· 일시: ${emailTime}\n· 장소: 화상 (Google Meet)\n· 안건: 신규 유저 이탈 구간 분석 및 개선 우선순위 결정\n\n사전에 검토할 자료는 회의 전날까지 공유드리겠습니다.\n감사합니다.`;
+    const mTo = this.matches('to', 'qTo');
+    const mCc = this.matches('cc', 'qCc');
+    return {
+      isRecurring, recurLabel, bigTime, emailBody,
+      open: s.open, closed: !s.open,
+      followRef: this.followRef,
+      toggle: () => this.setState(st => {
+        const opening = !st.open;
+        if (opening) {
+          const start = performance.now();
+          const tick = () => {
+            const el = document.querySelector('.follow');
+            const sc = el && el.closest('.scroll');
+            const editor = document.querySelector('.editor');
+            if (!el || !sc) { requestAnimationFrame(tick); return; }
+            const target = Math.min(el.offsetTop - 50, sc.scrollHeight - sc.clientHeight);
+            const ready = editor && (sc.scrollHeight - sc.clientHeight) >= target - 1;
+            if (ready || performance.now() - start > 600) {
+              sc.scrollTo({ top: Math.max(target, 0), behavior: 'smooth' });
+            } else {
+              requestAnimationFrame(tick);
+            }
+          };
+          requestAnimationFrame(tick);
+        }
+        return { open: opening, qTo: '', qCc: '' };
+      }),
+      copyLink: () => this.toast('회의 링크를 복사했어요'),
+      sendMail: () => { this.setState({ open: false, sent: true }); this.toast('정식 안내 메일을 보냈어요', true); },
+      onUndoMail: () => { this.setState({ sent: false }); this.toast('메일 발송을 되돌렸어요'); },
+      toastHasUndo: !!s.toastUndo,
+      followTitle: s.sent ? '추가 안내 메일 작성' : '정식 안내 메일 작성',
+      followBtn: s.sent ? '추가 작성' : '작성하기',
+      followSub: s.sent ? '필요하면 추가 안내 메일을 작성할 수 있어요.' : '기본 안내는 이미 전송됐어요. 필요하면 정식 안내 메일을 추가로 작성할 수 있어요.',
+      hasToast: !!s.toast, toastMsg: s.toast || '',
+      toChips: this.chips('to'), ccChips: this.chips('cc'),
+      qTo: s.qTo, qCc: s.qCc,
+      setQTo: (e) => this.setState({ qTo: e.target.value }),
+      setQCc: (e) => this.setState({ qCc: e.target.value }),
+      matchesTo: mTo, matchesCc: mCc,
+      showAcTo: s.qTo.trim().length > 0 && mTo.length > 0,
+      noMatchTo: s.qTo.trim().length > 0 && mTo.length === 0,
+      showAcCc: s.qCc.trim().length > 0 && mCc.length > 0,
+      noMatchCc: s.qCc.trim().length > 0 && mCc.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>

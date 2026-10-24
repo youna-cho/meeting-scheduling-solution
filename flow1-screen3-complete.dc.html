@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fastly.jsdelivr.net">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard','Pretendard Variable',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{min-width:1440px;background:#FBFCFE}
+a{color:#0064FF;text-decoration:none}a:hover{color:#0052cc}
+.frame{width:1440px;height:900px;position:relative;overflow:hidden;background:#FBFCFE;margin:0 auto}
+.aurora{position:absolute;inset:0;pointer-events:none}
+.a-bloom{position:absolute;left:50%;bottom:-340px;transform:translateX(-50%);width:1500px;height:760px;border-radius:50%;background:radial-gradient(50% 60% at 50% 60%,#ffffff 0%,#d9e8ff 34%,#7db0ff 58%,#2f83ff 78%,transparent 100%);filter:blur(46px);opacity:.68}
+.a-bloom2{position:absolute;left:16%;top:-180px;width:620px;height:520px;border-radius:50%;background:radial-gradient(circle,#8fbcff5c,transparent 70%);filter:blur(60px)}
+.a-bloom3{position:absolute;right:12%;top:-140px;width:560px;height:480px;border-radius:50%;background:radial-gradient(circle,#bcd4ff52,transparent 70%);filter:blur(60px)}
+.a-veil{position:absolute;inset:0;background:linear-gradient(180deg,#fbfcfeee 0%,#fbfcfe66 32%,transparent 56%)}
+.stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding-top:124px}
+.succ-icon{width:76px;height:76px;border-radius:50%;background:#0064FF;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 34px -8px #0064ff88;animation:pop .55s cubic-bezier(.2,.8,.3,1.2) both}
+.succ-icon svg{width:38px;height:38px}
+.succ-icon path{stroke-dasharray:36;stroke-dashoffset:36;animation:draw .4s .28s ease forwards}
+@keyframes pop{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+.headline{margin-top:24px;text-align:center;font-size:34px;line-height:1.3;font-weight:800;letter-spacing:-.02em;color:#191F28}
+.subcopy{margin-top:12px;text-align:center;font-size:16px;line-height:1.6;color:#6b7684;font-weight:500}
+.cards{margin-top:34px;width:560px;display:flex;flex-direction:column;gap:16px}
+.card{background:#fff;border:1px solid #eef1f5;border-radius:20px;box-shadow:0 22px 60px -26px #10357522,0 3px 12px #1035750d;padding:24px 26px}
+.ic-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.ic-title{font-size:19px;font-weight:800;letter-spacing:-.02em;color:#191F28;line-height:1.35}
+.chip{flex-shrink:0;padding:6px 12px;border-radius:8px;background:#eef4ff;color:#0064FF;font-size:12.5px;font-weight:700}
+.chip.decision{background:#FBEAE7;color:#C6483A}
+.chip.brainstorm{background:#fff3e3;color:#d97706}
+.chip.share{background:#e9f7ef;color:#0f9d58}
+.chip.review{background:#f2eefb;color:#7c53d4}
+.divider{height:1px;background:#f1f3f6;margin:18px 0}
+.meta{display:flex;flex-direction:column;gap:14px}
+.mrow{display:flex;align-items:flex-start;gap:12px}
+.mlabel{width:56px;flex-shrink:0;font-size:13px;font-weight:600;color:#8b95a1;padding-top:5px}
+.plist{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.npill{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;background:#FFFFFF;border:1px solid #E5EAF0;border-radius:12px;font-size:13px;font-weight:600;color:#4E5968}
+.host-mini{font-size:10.5px;font-weight:700;color:#0064FF;background:#eef4ff;border:1px solid #cfe0ff;padding:1px 6px;border-radius:5px}
+.me-mini{font-size:10.5px;font-weight:700;color:#0064FF;background:#eef4ff;border:1px solid #cfe0ff;padding:1px 6px;border-radius:5px}
+.mval{font-size:14px;font-weight:600;color:#333d4b;padding-top:2px}
+.best{background:linear-gradient(180deg,#f5f9ff 0%,#fbfdff 100%);border:1.5px solid #b9d3ff;border-radius:20px;padding:24px 26px;box-shadow:0 18px 44px -22px #0064ff44}
+.best-lab{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:#0064FF}
+.best-lab .bdot{width:7px;height:7px;border-radius:50%;background:#0064FF;box-shadow:0 0 0 4px #0064ff22}
+.best-time{margin-top:14px;font-size:28px;font-weight:800;letter-spacing:-.02em;color:#191F28}
+.best-time .bday{color:#0064FF}
+.best-note{margin-top:12px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:#6b7684}
+.best-note .ni{width:16px;height:16px;border-radius:50%;background:#e6eefc;color:#0064FF;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cta{margin-top:26px;width:560px;display:flex;gap:12px}
+.btn-ghost{flex:1;height:56px;border:1px solid #e1e6ec;border-radius:15px;background:#fff;color:#4e5968;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;transition:all .12s}
+.btn-ghost:hover{background:#f7f8fa;border-color:#d3d9e0}
+.btn-primary{flex:1;height:56px;border:none;border-radius:15px;background:#0064FF;color:#fff;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 12px 26px -8px #0064ff88;transition:transform .12s,box-shadow .12s}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 16px 32px -8px #0064ff99}
+.btn-primary:active{transform:translateY(0)}
+</style>
+</helmet>
+<div class="frame">
+<div class="aurora"><div class="a-bloom"></div><div class="a-bloom2"></div><div class="a-bloom3"></div><div class="a-veil"></div></div>
+<div class="stage">
+<div class="succ-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+<h1 class="headline">응답이 제출되었습니다</h1>
+<p class="subcopy">조율 마감 전까지 언제든 수정할 수 있어요.</p>
+<div class="cards">
+<div class="card">
+<div class="ic-top"><div class="ic-title">온보딩 전환율 개선 TFT 킥오프</div><span class="{{ chipCls }}">{{ chipLabel }}</span></div>
+<div class="divider"></div>
+<div class="meta">
+<div class="mrow"><span class="mlabel">참여자</span><div class="plist"><span class="npill">조윤아<span class="host-mini">주최</span></span><span class="npill">김민준<span class="me-mini">나</span></span><span class="npill">박서연</span><span class="npill">박준형</span><span class="npill">최지우</span><span class="npill">정하은</span></div></div>
+<div class="mrow"><span class="mlabel" style="padding-top: 2px">장소</span><span class="mval" style="padding-left: 11px">화상 · Google Meet</span></div>
+<div class="mrow"><span class="mlabel" style="padding-top: 2px">조율 마감</span><span class="mval" style="padding-left: 11px">7/17 금</span></div>
+</div>
+</div>
+<div class="best">
+<div class="best-lab"><span class="bdot"></span>현재 응답 기준 · 가장 몰입할 수 있는 시간</div>
+
+<div class="best-time" style="font-size: 20px"><span class="bday" style="color: rgb(25, 31, 40);">{{ bestTime }}</span> · 14:00–15:00</div><div class="best-note"><span class="ni">i</span>최종 시간은 주최자가 결정해요. 응답이 모이면 추천 시간이 달라질 수 있어요.</div>
+</div>
+</div>
+<div class="cta"><button class="btn-ghost" onClick="{{ goEdit }}">내 응답 수정하기</button><button class="btn-primary" onClick="{{ goDone }}">완료</button></div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;purpose&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;결정&quot;,&quot;브레인스토밍&quot;,&quot;정보 공유&quot;,&quot;리뷰&quot;],&quot;default&quot;:&quot;결정&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Meeting&quot;},&quot;recurrence&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;없음&quot;,&quot;매주&quot;,&quot;매달&quot;],&quot;default&quot;:&quot;없음&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Meeting&quot;}}">
+class Component extends DCLogic {
+  renderVals(){
+    const purpose = this.props.purpose ?? '결정';
+    const pmap = {'결정':'decision','브레인스토밍':'brainstorm','정보 공유':'share','리뷰':'review'};
+    const recur = this.props.recurrence ?? '없음';
+    const bestMap = {'매주':'매주 월요일','매달':'매달 20일'};
+    return { chipCls: 'chip ' + (pmap[purpose] || 'decision'), chipLabel: purpose, bestTime: bestMap[recur] || '7/20 월',
+      goEdit: ()=>{ window.location.href = 'flow1-screen2-grid.dc.html?restore=1'; },
+      goDone: ()=>{ window.location.href = 'transition2-organizer-push.dc.html'; } };
+  }
+}
+</script>
+</body>
+</html>

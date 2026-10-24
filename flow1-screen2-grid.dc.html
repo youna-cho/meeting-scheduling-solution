@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fastly.jsdelivr.net">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard','Pretendard Variable',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{min-width:1440px;background:#FBFCFE}
+a{color:#0064FF;text-decoration:none}a:hover{color:#0052cc}
+.frame{width:1440px;height:900px;position:relative;overflow:hidden;background:#FBFCFE;margin:0 auto}
+.aurora{position:absolute;inset:0;pointer-events:none}
+.a-bloom{position:absolute;left:50%;bottom:-460px;transform:translateX(-50%);width:1600px;height:760px;border-radius:50%;background:radial-gradient(50% 60% at 50% 60%,#ffffff 0%,#dbeaff 38%,#7db0ff 62%,#0064ff 82%,transparent 100%);filter:blur(60px);opacity:.55}
+.a-bloom2{position:absolute;left:10%;top:-200px;width:620px;height:520px;border-radius:50%;background:radial-gradient(circle,#9cc4ff66,transparent 70%);filter:blur(70px)}
+.a-bloom3{position:absolute;right:8%;top:-160px;width:560px;height:480px;border-radius:50%;background:radial-gradient(circle,#c3d8ff66,transparent 70%);filter:blur(70px)}
+.a-veil{position:absolute;inset:0;background:linear-gradient(180deg,#fbfcfef2 0%,#fbfcfecc 40%,#fbfcfe99 100%)}
+.stage{position:absolute;inset:0;display:flex;flex-direction:column;padding:44px 60px 40px}
+.hdr{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:30px}
+.htitle{font-size:26px;font-weight:800;letter-spacing:-.02em;color:#191F28}
+.hsub{margin-top:6px;font-size:14px;font-weight:500;color:#6b7684;position:relative;top:2px}
+.step{display:flex;align-items:center;gap:10px}
+.stepnum{font-size:13px;font-weight:700;color:#8b95a1}
+.stepdots{display:flex;gap:6px}
+.sd{width:22px;height:5px;border-radius:3px;background:#e1e6ec}
+.sd.on{background:#0064FF}
+.body2{flex:1;display:flex;gap:28px;min-height:0}
+.gcard{flex:1.55;background:#fff;border:1px solid #eef1f5;border-radius:22px;box-shadow:0 22px 60px -26px #10357522,0 3px 12px #1035750d;padding:26px 28px;display:flex;flex-direction:column;min-height:0}
+.gc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.gc-title{font-size:16px;font-weight:700;color:#333d4b}
+.gc-hint{font-size:12.5px;font-weight:500;color:#8b95a1}
+.legend{display:flex;gap:16px}
+.lg{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:#4e5968}
+.sw{width:14px;height:14px;border-radius:4px}
+.sw.pref{background:#0064FF}
+.sw.avl{background:#85B7EB}
+.sw.bsy{background:#E7E9EE}
+.sw.non{background:#fff;border:1px solid #dde2e8}
+.gridwrap{flex:1;display:flex;user-select:none;border:1px solid #eef1f4;border-radius:12px;overflow:hidden;min-height:0}
+.timecol{width:52px;flex-shrink:0;display:flex;flex-direction:column;border-right:1px solid #eef1f4}
+.thead{height:34px;flex-shrink:0}
+.tlabel{flex:1;position:relative;font-size:11px;font-weight:600;color:#adb5bd;text-align:right;padding-right:8px}
+.tlabel span{position:absolute;top:-7px;right:8px}
+.daycol{flex:1;display:flex;flex-direction:column;border-right:1px solid #eef1f4}
+.daycol:last-child{border-right:none}
+.dhead{height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:5px;background:#fafbfc;border-bottom:1px solid #eef1f4}
+.dh-day{font-size:12.5px;font-weight:700;color:#333d4b}
+.dh-date{font-size:12.5px;font-weight:700;color:#333d4b}
+.cell{flex:1;border-bottom:1px solid #f4f6f8;cursor:pointer;transition:box-shadow .1s}
+.cell.hr{border-bottom:1px solid #e6eaef}
+.cell:hover{box-shadow:inset 0 0 0 2px #0064ff55;border-radius:3px}
+.cell.prefer{background:#0064FF}
+.cell.avail{background:#85B7EB}
+.cell.busy{background:#E7E9EE;cursor:pointer}
+.cell.busy:hover{box-shadow:inset 0 0 0 2px #adb5bd}
+.cell.sel{box-shadow:inset 0 0 0 2px #0064ff;border-radius:3px;position:relative;z-index:1}
+.chip.decision{background:#FBEAE7;color:#C6483A}
+.chip.brainstorm{background:#fff3e3;color:#d97706}
+.chip.share{background:#e9f7ef;color:#0f9d58}
+.chip.review{background:#f2eefb;color:#7c53d4}
+.plist{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.npill{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;background:#FFFFFF;border:1px solid #E5EAF0;border-radius:12px;font-size:13px;font-weight:600;color:#4E5968}
+.host-mini{font-size:10.5px;font-weight:700;color:#0064FF;background:#eef4ff;border:1px solid #cfe0ff;padding:1px 6px;border-radius:5px}
+.me-mini{font-size:10.5px;font-weight:700;color:#0064FF;background:#eef4ff;border:1px solid #cfe0ff;padding:1px 6px;border-radius:5px}
+.mrow-type{align-items:center}
+.mrow-type .mlabel{padding-top:0;position:relative;top:7px}
+.mrow-dl{align-items:center}
+.mrow-dl .mlabel{padding-top:0;position:relative;top:1px}
+.iseg{display:inline-flex;padding:3px;background:#eef1f5;border-radius:10px;gap:2px}
+.isegbtn{border:none;background:transparent;padding:6px 15px;border-radius:7px;font-family:inherit;font-size:13px;font-weight:700;color:#8b95a1;cursor:pointer;transition:all .16s ease}
+.isegbtn.on{background:#191F28;color:#fff;box-shadow:0 3px 9px #191f2830}
+.icard{flex:1;background:#fff;border:1px solid #eef1f5;border-radius:22px;box-shadow:0 22px 60px -26px #10357522,0 3px 12px #1035750d;padding:30px 30px;display:flex;flex-direction:column}
+.ic-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.ic-title{font-size:20px;font-weight:800;letter-spacing:-.02em;color:#191F28;line-height:1.35}
+.chip{flex-shrink:0;padding:6px 12px;border-radius:8px;background:#eef4ff;color:#0064FF;font-size:12.5px;font-weight:700}
+.divider{height:1px;background:#f1f3f6;margin:20px 0}
+.meta{display:flex;flex-direction:column;gap:15px}
+.mrow{display:flex;align-items:flex-start;gap:12px}
+.mlabel{width:72px;flex-shrink:0;font-size:13px;font-weight:600;color:#8b95a1;padding-top:1px}
+.mval{font-size:14px;font-weight:600;color:#333d4b;line-height:1.45;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.avatars{display:flex;align-items:center}
+.av{width:26px;height:26px;border-radius:50%;border:2px solid #fff;margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
+.av:first-child{margin-left:0}
+.host-tag{font-size:11px;font-weight:700;color:#0064FF;background:#eef4ff;padding:2px 7px;border-radius:6px}
+.prog{margin-top:auto;padding-top:20px}
+.prog-lab{font-size:13px;font-weight:700;color:#4e5968;margin-bottom:10px}
+.prog-row{display:flex;align-items:center;gap:14px}
+.prog-bar{flex:1;height:8px;border-radius:6px;background:#f1f3f6;overflow:hidden}
+.prog-fill2{height:100%;width:50%;border-radius:6px;background:#0064FF}
+.prog-count{font-size:12.5px;font-weight:600;color:#8b95a1;white-space:nowrap}
+.prog-count b{color:#0064FF;font-weight:700}
+.footer{display:flex;align-items:center;justify-content:space-between;margin-top:24px}
+.btn-ghost{height:52px;padding:0 26px;border:1px solid #e1e6ec;border-radius:14px;background:#fff;color:#4e5968;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;transition:all .12s}
+.btn-ghost:hover{background:#f7f8fa;border-color:#d3d9e0}
+.btn-primary{height:52px;padding:0 40px;border:none;border-radius:14px;background:#0064FF;color:#fff;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 12px 26px -8px #0064ff88;transition:transform .12s,box-shadow .12s}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 16px 32px -8px #0064ff99}
+.pop-backdrop{position:absolute;inset:0;z-index:20}
+.popover{position:absolute;z-index:21;transform:translate(-50%,calc(-100% - 12px));display:flex;align-items:center;gap:6px;padding:7px;background:#fff;border:1px solid #eef1f5;border-radius:14px;box-shadow:0 14px 34px -8px #10357540,0 3px 10px #1035751a}
+.pcaret{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%) rotate(45deg);width:12px;height:12px;background:#fff;border-right:1px solid #eef1f5;border-bottom:1px solid #eef1f5}
+.pchip{display:flex;align-items:center;gap:7px;border:none;background:#f7f8fa;padding:8px 13px;border-radius:9px;font-family:inherit;font-size:13.5px;font-weight:700;color:#333d4b;cursor:pointer;transition:background .12s}
+.pchip:hover{background:#eef1f5}
+.pdot{width:12px;height:12px;border-radius:4px}
+.pclear{border:none;background:transparent;padding:8px 12px;border-radius:9px;font-family:inherit;font-size:13.5px;font-weight:700;color:#8b95a1;cursor:pointer;transition:background .12s}
+.pclear:hover{background:#f7f8fa;color:#4e5968}
+.toast{position:absolute;left:50%;bottom:30px;transform:translateX(-50%) translateY(20px);z-index:30;display:flex;align-items:center;gap:16px;padding:14px 16px 14px 20px;background:#191F28;border-radius:14px;box-shadow:0 16px 40px #10357544;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;overflow:hidden}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.toast-txt{font-size:14px;font-weight:600;color:#fff}
+.toast-act{border:none;background:transparent;color:#6aa8ff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;padding:6px 4px}
+.toast-sep{width:1px;height:15px;background:#ffffff2e;flex-shrink:0}
+.toast-undo{border:none;background:transparent;color:#8b95a1;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;padding:6px 4px}
+.gc-hintrow{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:12px}
+.reset-btn{flex-shrink:0;border:none;background:transparent;color:#8b95a1;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;padding:4px 8px;border-radius:7px;transition:all .12s}
+.reset-btn:hover{color:#4e5968;background:#f4f6f8}
+.modal-back{position:absolute;inset:0;z-index:40;background:#191f2833;display:flex;align-items:center;justify-content:center}
+.modal{width:344px;background:#fff;border-radius:18px;box-shadow:0 24px 60px -12px #10357555;padding:26px 26px 20px}
+.modal-t{font-size:16.5px;font-weight:800;letter-spacing:-.01em;color:#191F28}
+.modal-d{margin-top:8px;font-size:13.5px;font-weight:500;color:#8b95a1;line-height:1.55}
+.modal-d span{display:block;white-space:nowrap}
+.modal-actions{display:flex;gap:10px;margin-top:22px}
+.modal-btn{flex:1;height:46px;border-radius:12px;font-family:inherit;font-size:14.5px;font-weight:700;cursor:pointer;transition:all .12s}
+.modal-cancel{border:1px solid #e1e6ec;background:#fff;color:#4e5968}
+.modal-cancel:hover{background:#f7f8fa}
+.modal-confirm{border:none;background:#F04452;color:#fff}
+.modal-confirm:hover{background:#e0303e}
+.modal-submit{border:none;background:#0064FF;color:#fff}
+.modal-submit:hover{background:#0052cc}
+.toast-timer{position:absolute;left:0;bottom:0;height:3px;background:#6aa8ff;width:100%;transform-origin:left}
+.toast.show .toast-timer{animation:drain 5s linear forwards}
+@keyframes drain{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.tone-violet .a-bloom{background:radial-gradient(50% 60% at 50% 60%,#ffffff 0%,#e6ddff 38%,#a98bff 62%,#6b3fff 82%,transparent 100%)}
+.tone-violet .a-bloom2{background:radial-gradient(circle,#b9a3ff66,transparent 70%)}
+.tone-violet .a-bloom3{background:radial-gradient(circle,#d3c6ff66,transparent 70%)}
+.tone-mist .a-bloom{background:radial-gradient(50% 60% at 50% 60%,#ffffff 0%,#eef1f5 40%,#c4ccd6 66%,#9aa6b4 84%,transparent 100%)}
+.tone-mist .a-bloom2{background:radial-gradient(circle,#c8d0da66,transparent 70%)}
+.tone-mist .a-bloom3{background:radial-gradient(circle,#d6dce366,transparent 70%)}
+.cs-flat .gcard,.cs-flat .icard{box-shadow:none;border-color:#e9edf2}
+.cs-outlined .gcard,.cs-outlined .icard{box-shadow:none;border-color:#d3dae2;border-width:1.5px}
+</style>
+</helmet>
+<div class="frame {{ rootCls }}" ref="{{ frameRef }}">
+<div class="aurora"><div class="a-bloom"></div><div class="a-bloom2"></div><div class="a-bloom3"></div><div class="a-veil"></div></div>
+<div class="stage">
+<div class="hdr"><div><div class="htitle">가능한 시간을 알려주세요</div><div class="hsub">선호하거나 가능한 시간대를 표시하면 돼요. 이미 잡힌 일정은 자동으로 비워뒀어요.</div></div></div>
+<div class="body2">
+<div class="gcard">
+<div class="gc-head"><div class="gc-title">시간 표시</div><div class="legend"><span class="lg"><span class="sw pref"></span>선호</span><span class="lg"><span class="sw avl"></span>가능</span><span class="lg"><span class="sw bsy"></span>일정 있음</span><sc-if value="{{ showNon }}" hint-placeholder-val="{{ false }}"><span class="lg"><span class="sw non"></span>미응답</span></sc-if></div></div>
+<div class="gridwrap">
+<div class="timecol"><div class="thead"></div><sc-for list="{{ times }}" as="t" hint-placeholder-count="18"><div class="tlabel"><span>{{ t }}</span></div></sc-for></div>
+<sc-for list="{{ columns }}" as="col" hint-placeholder-count="5"><div class="daycol"><div class="dhead"><span class="dh-date">{{ col.date }}</span><span class="dh-day">{{ col.day }}</span></div><sc-for list="{{ col.cells }}" as="c" hint-placeholder-count="18"><div class="{{ c.cls }}" title="{{ c.title }}" onMouseDown="{{ c.onDown }}" onMouseEnter="{{ c.onEnter }}"></div></sc-for></div></sc-for>
+</div>
+<div class="gc-hintrow"><div class="gc-hint">셀을 클릭하거나 빈 시간을 드래그해 표시하고, 이미 표시한 시간은 드래그해 한 번에 바꿀 수 있어요.</div><button class="reset-btn" onClick="{{ askReset }}">전체 초기화</button></div>
+</div>
+<div class="icard">
+<div class="ic-top"><div class="ic-title">온보딩 전환율 개선 TFT 킥오프</div><span class="{{ chipCls }}">{{ chipLabel }}</span></div>
+<div class="divider"></div>
+<div class="meta">
+<div class="mrow"><span class="mlabel">안건</span><span class="mval">신규 유저 이탈 구간 분석 및 개선 우선순위 결정</span></div>
+<div class="mrow"><span class="mlabel">회의 시간</span><span class="mval">1시간</span></div>
+<div class="mrow"><span class="mlabel">장소</span><span class="mval">화상 · Google Meet</span></div>
+<div class="mrow"><span class="mlabel">참여자</span><div class="mval plist"><span class="npill">조윤아<span class="host-mini">주최</span></span><span class="npill">김민준<span class="me-mini">나</span></span><span class="npill">박서연</span><span class="npill">박준형</span><span class="npill">최지우</span><span class="npill">정하은</span></div></div>
+<div class="mrow mrow-type"><span class="mlabel">내 참여 유형</span><div class="iseg"><button class="isegbtn {{ reqOn }}" onClick="{{ setRequired }}">필수</button><button class="isegbtn {{ optOn }}" onClick="{{ setOptional }}">선택</button></div></div>
+<sc-if value="{{ isRecurring }}" hint-placeholder-val="{{ false }}"><div class="mrow"><span class="mlabel">반복</span><span class="mval">{{ recurLabel }}</span></div></sc-if>
+<div class="mrow mrow-dl"><span class="mlabel">조율 마감</span><span class="mval">7/17 금</span></div>
+</div>
+<div class="prog"><div class="prog-lab">응답 진행률</div><div class="prog-row"><div class="prog-bar"><div class="prog-fill2"></div></div><span class="prog-count"><b>6명 중 3명</b> 응답 완료</span></div></div>
+</div>
+</div>
+<div class="footer"><button class="btn-ghost" onClick="{{ goPrev }}">← 이전으로</button><button class="btn-primary" onClick="{{ goNext }}">응답 완료 →</button></div>
+</div>
+<sc-if value="{{ hasPop }}" hint-placeholder-val="{{ false }}"><div class="pop-backdrop" onMouseDown="{{ closePop }}"></div><div class="popover" style="left:{{ popLeft }}px;top:{{ popTop }}px"><button class="pchip" onClick="{{ setPrefer }}"><span class="pdot" style="background:#0064FF"></span>선호</button><button class="pchip" onClick="{{ setAvail }}"><span class="pdot" style="background:#85B7EB"></span>가능</button><button class="pclear" onClick="{{ clearSel }}">지우기</button><span class="pcaret"></span></div></sc-if>
+<div class="toast {{ toastCls }}"><span class="toast-txt">{{ toastText }}</span><sc-if value="{{ showPromote }}" hint-placeholder-val="{{ false }}"><button class="toast-act" onClick="{{ promote }}">선호로 변경</button><span class="toast-sep"></span></sc-if><button class="toast-undo" onClick="{{ undo }}">되돌리기</button><span class="toast-timer"></span></div>
+<sc-if value="{{ confirmReset }}" hint-placeholder-val="{{ false }}"><div class="modal-back" onMouseDown="{{ cancelReset }}"><div class="modal"><div class="modal-t">표시한 시간을 모두 초기화할까요?</div><div class="modal-d"><span>표시한 선호·가능 시간이 모두 사라져요.</span><span>일정이 있는 시간은 그대로 남아요.</span></div><div class="modal-actions"><button class="modal-btn modal-cancel" onClick="{{ cancelReset }}">취소</button><button class="modal-btn modal-confirm" onClick="{{ doReset }}">초기화</button></div></div></div></sc-if>
+<sc-if value="{{ confirmSubmit }}" hint-placeholder-val="{{ false }}"><div class="modal-back" onMouseDown="{{ cancelSubmit }}"><div class="modal" onMouseDown="{{ stopModal }}"><div class="modal-t">응답을 제출할까요?</div><div class="modal-d"><span>표시한 선호·가능 시간이 주최자에게 전달돼요.</span><span>조율 마감 전까지 언제든 수정할 수 있어요.</span></div><div class="modal-actions"><button class="modal-btn modal-cancel" onClick="{{ cancelSubmit }}">취소</button><button class="modal-btn modal-submit" onClick="{{ doSubmit }}">제출하기</button></div></div></div></sc-if></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;purpose&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;결정&quot;,&quot;브레인스토밍&quot;,&quot;정보 공유&quot;,&quot;리뷰&quot;],&quot;default&quot;:&quot;결정&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Meeting&quot;},&quot;recurrence&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;없음&quot;,&quot;매주&quot;,&quot;매달&quot;],&quot;default&quot;:&quot;없음&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Meeting&quot;},&quot;candidateType&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;후보 일자&quot;,&quot;후보 요일&quot;],&quot;default&quot;:&quot;후보 일자&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Meeting&quot;},&quot;showUnanswered&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Legend&quot;},&quot;auroraTone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;blue&quot;,&quot;violet&quot;,&quot;mist&quot;],&quot;default&quot;:&quot;blue&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Atmosphere&quot;},&quot;cardStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;elevated&quot;,&quot;flat&quot;,&quot;outlined&quot;],&quot;default&quot;:&quot;elevated&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Surface&quot;}}">
+class Component extends DCLogic {
+  constructor(p){ super(p); this.frameRef = React.createRef(); }
+  busyNames = {'월-6':'팀 주간회의','월-7':'팀 주간회의','화-0':'데일리 스탠드업','수-9':'디자인 리뷰','수-10':'디자인 리뷰','목-13':'전사 공유회','목-14':'전사 공유회','금-1':'데일리 스탠드업','금-2':'데일리 스탠드업'};
+  state = { slots:{'월-6':'busy','월-7':'busy','화-0':'busy','수-9':'busy','수-10':'busy','목-13':'busy','목-14':'busy','금-1':'busy','금-2':'busy'}, sel:[], popover:null, toast:false, toastText:'', toastPromote:false, confirmReset:false, confirmSubmit:false, myRole:'required' };
+  anchor=null; dragged=false; snap=null; anchorRect=null; _t=null; anchorState=null; mode='paint'; lastKeys=[];
+
+  componentDidMount(){ this._up=()=>this.windowUp(); window.addEventListener('mouseup',this._up);
+    try{ const q=new URLSearchParams(window.location.search); if(q.get('restore')==='1'){ const s=localStorage.getItem('rt_slots'); const r=localStorage.getItem('rt_role'); const up={}; if(s) up.slots=JSON.parse(s); if(r) up.myRole=r; if(Object.keys(up).length) this.setState(up); } }catch(e){} }
+  componentWillUnmount(){ window.removeEventListener('mouseup',this._up); if(this._t)clearTimeout(this._t); }
+
+  down(d,i,e){ this.snap={...this.state.slots}; this.anchor={day:d,i}; this.dragged=false; this.anchorRect=e.currentTarget.getBoundingClientRect(); this.anchorState=this.state.slots[d+'-'+i]||null; this.mode = this.anchorState===null ? 'paint' : 'select'; if(this.state.popover||this.state.sel.length) this.setState({popover:null,sel:[]}); }
+  enter(d,i){ if(!this.anchor||d!==this.anchor.day)return; this.dragged=true; if(this.mode==='paint'){ this.paint(this.anchor.day,this.anchor.i,i); } else { this.setState({sel:this.rangeKeys(this.anchor.day,this.anchor.i,i)}); } }
+  windowUp(){ if(!this.anchor)return; const {day,i}=this.anchor; if(!this.dragged){ this.openPopover([day+'-'+i]); } else if(this.mode==='paint'){ this.showToast('‘가능’으로 표시했어요', true); } else { const keys=this.state.sel.length?this.state.sel:[day+'-'+i]; this.openPopover(keys); } this.anchor=null; this.dragged=false; }
+
+  rangeKeys(day,a,b){ const lo=Math.min(a,b),hi=Math.max(a,b); const ks=[]; for(let k=lo;k<=hi;k++) ks.push(day+'-'+k); return ks; }
+  paint(day,a,b){ const lo=Math.min(a,b),hi=Math.max(a,b); this.setState(s=>{const sl={...s.slots}; const done=[]; for(let k=lo;k<=hi;k++){const key=day+'-'+k; if(sl[key]==='busy')continue; sl[key]='available'; done.push(key);} this.lastKeys=done; return {slots:sl};}); }
+
+  openPopover(keys){ const fr=this.frameRef.current.getBoundingClientRect(); const scale=fr.width/1440; const r=this.anchorRect; const x=(r.left-fr.left+r.width/2)/scale; const y=(r.top-fr.top)/scale; this.setState({popover:{keys,x,y}}); }
+  closePop(){ this.setState({popover:null, sel:[]}); }
+
+  choose(val){ const p=this.state.popover; if(!p)return; const keys=p.keys; this.lastKeys=keys.slice(); this.setState(s=>{const sl={...s.slots}; keys.forEach(key=>{ if(val==='clear'){ if(this.busyNames[key]) sl[key]='busy'; else delete sl[key]; } else sl[key]=val; }); return {slots:sl, popover:null, sel:[]};}); const n=keys.length; const suf=n>1?` (${n}개)`:''; const msg = val==='clear' ? `표시를 지웠어요${suf}` : (val==='prefer'?`‘선호’로 표시했어요${suf}`:`‘가능’으로 표시했어요${suf}`); this.showToast(msg, val==='available'); }
+
+  promote(){ this.setState(s=>{const sl={...s.slots}; this.lastKeys.forEach(k=>{ if(sl[k]==='available') sl[k]='prefer'; }); return {slots:sl};}); this.showToast('‘선호’로 변경했어요', false); }
+  askReset(){ this.setState({confirmReset:true, popover:null, sel:[]}); }
+  cancelReset(){ this.setState({confirmReset:false}); }
+  cancelSubmit(){ this.setState({confirmSubmit:false}); }
+  doSubmit(){ try{ localStorage.setItem('rt_slots', JSON.stringify(this.state.slots)); localStorage.setItem('rt_role', this.state.myRole); }catch(e){} window.location.href = 'flow1-screen3-complete.dc.html'; }
+  doReset(){ this.snap={...this.state.slots}; this.setState(s=>{const sl={}; Object.keys(s.slots).forEach(k=>{ if(s.slots[k]==='busy') sl[k]='busy'; }); return {slots:sl, confirmReset:false, popover:null, sel:[]};}); this.showToast('표시한 시간을 모두 초기화했어요', false); }
+
+  showToast(t, promote){ if(this._t)clearTimeout(this._t); this.setState({toast:true,toastText:t,toastPromote:!!promote}); this._t=setTimeout(()=>this.setState({toast:false}),5000); }
+  setMyRole(next){ if(next===this.state.myRole)return; this.setState({myRole:next}); }
+  undo(){ if(this._t)clearTimeout(this._t); this.setState({slots:{...(this.snap||{})}, toast:false, popover:null, sel:[]}); }
+
+  renderVals(){
+    const days=[['월','7/20'],['화','7/21'],['수','7/22'],['목','7/23'],['금','7/24']];
+    const candType=this.props.candidateType ?? '후보 일자';
+    const recur=this.props.recurrence ?? '없음';
+    const times=Array.from({length:18},(_,i)=> i%2===0 ? `${String(9+i/2).padStart(2,'0')}:00` : '');
+    const sel=new Set(this.state.sel);
+    const columns=days.map(([d,dt])=>({ day: recur==='매달'?'':d, date: recur==='매주'?'':(recur==='매달'?(dt.split('/')[1]+'일'):dt), cells:Array.from({length:18},(_,i)=>{ const key=d+'-'+i; const st=this.state.slots[key]; let cls='cell'; if(i%2===1)cls+=' hr'; if(st==='prefer')cls+=' prefer'; else if(st==='available')cls+=' avail'; else if(st==='busy')cls+=' busy'; if(sel.has(key))cls+=' sel'; return { cls, title: st==='busy'?(this.busyNames[key]||'일정 있음'):'', onDown:(e)=>this.down(d,i,e), onEnter:()=>this.enter(d,i) }; }) }));
+    const p=this.state.popover;
+    const tone=this.props.auroraTone ?? 'blue';
+    const cs=this.props.cardStyle ?? 'elevated';
+    const purpose=this.props.purpose ?? '결정';
+    const recurMap={'매주':'매주 반복','매달':'매달 반복'};
+    const pmap={'결정':'decision','브레인스토밍':'brainstorm','정보 공유':'share','리뷰':'review'};
+    const myRole=this.state.myRole;
+    return { frameRef:this.frameRef, times, columns,
+      showNon: this.props.showUnanswered ?? false,
+      chipCls:'chip '+(pmap[purpose]||'decision'), chipLabel:purpose,
+      isRecurring: recur!=='없음', recurLabel: recurMap[recur]||'',
+      myLabel: myRole==='required'?'필수':'선택', reqOn: myRole==='required'?'on':'', optOn: myRole==='optional'?'on':'',
+      setRequired:()=>this.setMyRole('required'), setOptional:()=>this.setMyRole('optional'),
+      rootCls: `tone-${tone} cs-${cs}`,
+      hasPop:!!p, popLeft:p?p.x:0, popTop:p?p.y:0,
+      setPrefer:()=>this.choose('prefer'), setAvail:()=>this.choose('available'), clearSel:()=>this.choose('clear'), closePop:()=>this.closePop(),
+      toastCls:this.state.toast?'show':'', toastText:this.state.toastText, showPromote:this.state.toastPromote, promote:()=>this.promote(), undo:()=>this.undo(),
+      confirmReset:this.state.confirmReset, askReset:()=>this.askReset(), cancelReset:()=>this.cancelReset(), doReset:()=>this.doReset(),
+      confirmSubmit:this.state.confirmSubmit, cancelSubmit:()=>this.cancelSubmit(), doSubmit:()=>this.doSubmit(), stopModal:(e)=>e.stopPropagation(),
+      goPrev:()=>{ window.location.href = 'flow1-screen1-onboarding.dc.html'; },
+      goNext:()=>{ this.setState({confirmSubmit:true, popover:null, sel:[]}); } };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fastly.jsdelivr.net">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard','Pretendard Variable',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{min-width:1440px;background:#FBFCFE}
+a{color:#0064FF;text-decoration:none}a:hover{color:#0052cc}
+.frame{width:1440px;height:900px;position:relative;overflow:hidden;background:#FBFCFE;margin:0 auto}
+.bg{position:absolute;inset:0;filter:blur(3px) saturate(.92);transform:scale(1.01)}
+.dim{position:absolute;inset:0;background:rgba(15,25,45,.42)}
+.modalwrap{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.modal{width:480px;background:#fff;border-radius:24px;box-shadow:0 40px 100px -30px #0a1f4a66,0 8px 24px #0a1f4a22;padding:34px 34px 28px;animation:pop .32s cubic-bezier(.2,.8,.3,1.1) both}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.m-badge{width:56px;height:56px;border-radius:16px;background:#FFECEA;display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.m-badge svg{width:28px;height:28px}
+.m-title{font-size:23px;font-weight:800;letter-spacing:-.02em;color:#191F28}
+.m-sub{margin-top:10px;font-size:16px;font-weight:600;color:#4e5968;line-height:1.5}
+.infocard{margin-top:22px;background:#F7F8FA;border:1px solid #eef1f5;border-radius:16px;padding:20px 22px}
+.ic-name{font-size:17px;font-weight:800;color:#191F28;letter-spacing:-.01em}
+.ic-div{height:1px;background:#eceef1;margin:16px 0}
+.ic-rows{display:flex;flex-direction:column;gap:13px}
+.ic-row{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.ic-lab{font-size:13.5px;font-weight:600;color:#8b95a1;flex-shrink:0}
+.ic-val{font-size:14.5px;font-weight:700;color:#333d4b;text-align:right}
+.ic-val.red{color:#FF3B30}
+.ic-val.big{font-size:16px;font-weight:800}
+.ic-row-time{position:relative;background:#F1F3F6;padding:15px 22px;margin:0 -22px;border-radius:8px}
+.ic-row-time::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;background:#F0806F}
+.ic-val.emph{font-weight:800;color:#191F28}
+.pctwrap{display:flex;align-items:center;gap:9px}
+.low-tag{font-size:12px;font-weight:700;color:#FF3B30;background:#FFE6E3;padding:3px 9px;border-radius:7px}
+.ic-place{display:flex;align-items:center;gap:8px;color:#4e5968}
+.ic-place .gm{width:20px;height:20px;border-radius:6px;background:#f1f3f6;display:flex;align-items:center;justify-content:center;color:#8b95a1;flex-shrink:0}
+.ic-place .gm svg{width:12px;height:12px}
+.warnhint{margin-top:16px;display:flex;align-items:center;gap:9px;padding:12px 15px;background:#FFF4F3;border-radius:12px;font-size:13px;font-weight:600;color:#c0392b;line-height:1.4}
+.warnhint .wi{flex-shrink:0;width:16px;height:16px;color:#FF3B30}
+.warnhint .wi svg{width:16px;height:16px;display:block}
+.m-btns{margin-top:22px;display:flex;gap:10px}
+.btn-ghost{flex:1;height:54px;border:1px solid #e1e6ec;border-radius:14px;background:#fff;color:#333d4b;font-family:inherit;font-size:15.5px;font-weight:700;cursor:pointer;transition:all .12s}
+.btn-ghost:hover{background:#f7f8fa;border-color:#d3d9e0}
+.btn-danger{flex:1;height:54px;border:none;border-radius:14px;background:#191F28;color:#fff;font-family:inherit;font-size:15.5px;font-weight:700;cursor:pointer;transition:transform .12s,box-shadow .12s;box-shadow:0 10px 24px -10px #191f2899}
+.btn-danger:hover{transform:translateY(-1px)}
+</style>
+</helmet>
+<div class="frame" data-screen-label="몰입도 낮은 시간대 경고">
+<div class="bg"><dc-import name="flow2-screen2-dashboard" hint-size="1440px,900px"></dc-import></div>
+<div class="dim"></div>
+<div class="modalwrap"><div class="modal">
+
+<div class="m-badge"><svg viewBox="0 0 24 24" fill="none" stroke="#FF3B30" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="width: 35px; height: 35px"><path d="M12 7v7"></path><path d="M12 17.5h.01"></path></svg></div><div class="m-title">몰입도가 낮은 시간대입니다</div>
+<div class="m-sub">그래도 이 시간으로 확정할까요?</div>
+<div class="infocard">
+<div class="ic-name">온보딩 전환율 개선 TFT 킥오프</div>
+<div class="ic-div"></div>
+<div class="ic-rows">
+<div class="ic-row ic-row-time"><span class="ic-lab">확정 시간</span><span class="ic-val emph">{{ confirmTime }}</span></div>
+<div class="ic-row"><span class="ic-lab">몰입도</span><span class="pctwrap"><span class="ic-val red">{{ pctVal }}%</span><span class="low-tag">낮음</span></span></div>
+<div class="ic-row"><span class="ic-lab">참여자</span><span class="ic-val" style="color: #4E5968">6명 (주최자 포함)</span></div>
+<div class="ic-row"><span class="ic-lab">장소</span><span class="ic-val ic-place" style="color: #4E5968"><span class="gm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l6-3v10l-6-3z"></path><rect x="3" y="6" width="12" height="12" rx="2"></rect></svg></span>화상 · Google Meet</span></div>
+</div>
+</div>
+<div class="warnhint"><span class="wi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="stroke: #C0392B"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v4.5"></path><path d="M12 16h.01"></path></svg></span>몰입도 70% 미만으로, 참여자 선호가 낮은 시간대예요.</div>
+<div class="m-btns"><button class="btn-ghost" onClick="{{ onCancel }}">다시 검토</button><button class="btn-danger" onClick="{{ onConfirm }}">그래도 확정</button></div>
+</div></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;recurrence&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;없음&quot;,&quot;매주&quot;,&quot;매달&quot;],&quot;default&quot;:&quot;없음&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Meeting&quot;}}">
+class Component extends DCLogic {
+  renderVals(){
+    const qs=new URLSearchParams(window.location.search);
+    const qTime=qs.get('time'), qPct=qs.get('pct');
+    const recur=this.props.recurrence??'없음';
+    const defaultTime = recur==='매주' ? '매주 화요일 · 10:00–11:00' : (recur==='매달' ? '매달 21일 · 10:00–11:00' : '7/21 화 · 10:00–11:00');
+    const confirmTime = qTime || defaultTime;
+    return {
+      confirmTime,
+      pctVal: qPct || 57,
+      onConfirm:()=>{ const qs2=new URLSearchParams({time:confirmTime}); window.location.href = 'flow2-screen5-confirmed.dc.html?'+qs2.toString(); },
+      onCancel:()=>{ window.location.href = 'flow2-screen2-dashboard.dc.html'; }
+    };
+  }
+}
+</script>
+</body>
+</html>

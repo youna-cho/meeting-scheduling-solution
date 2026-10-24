@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fastly.jsdelivr.net">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard','Pretendard Variable',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{min-width:1440px;background:#FBFCFE}
+a{color:#0064FF;text-decoration:none}a:hover{color:#0052cc}
+.frame{width:1440px;height:900px;position:relative;overflow:hidden;background:#FBFCFE;margin:0 auto}
+.aurora{position:absolute;inset:0;pointer-events:none}
+.a-bloom{position:absolute;left:50%;bottom:-460px;transform:translateX(-50%);width:1600px;height:760px;border-radius:50%;background:radial-gradient(50% 60% at 50% 60%,#ffffff 0%,#dbeaff 38%,#7db0ff 62%,#0064ff 82%,transparent 100%);filter:blur(60px);opacity:.5}
+.a-bloom2{position:absolute;left:8%;top:-200px;width:600px;height:520px;border-radius:50%;background:radial-gradient(circle,#9cc4ff55,transparent 70%);filter:blur(70px)}
+.a-veil{position:absolute;inset:0;background:linear-gradient(180deg,#fbfcfef2 0%,#fbfcfecc 40%,#fbfcfe99 100%)}
+.tone-violet .a-bloom{background:radial-gradient(50% 60% at 50% 60%,#ffffff 0%,#e6ddff 38%,#a98bff 62%,#6b3fff 82%,transparent 100%)}
+.tone-violet .a-bloom2{background:radial-gradient(circle,#b9a3ff66,transparent 70%)}
+.tone-mist .a-bloom{background:radial-gradient(50% 60% at 50% 60%,#ffffff 0%,#eef1f5 40%,#c4ccd6 66%,#9aa6b4 84%,transparent 100%)}
+.tone-mist .a-bloom2{background:radial-gradient(circle,#c8d0da66,transparent 70%)}
+.stage{position:absolute;inset:0;display:flex;flex-direction:column}
+.hdr{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:40px 64px 22px}
+.htitle{font-size:26px;font-weight:800;letter-spacing:-.02em;color:#191F28}
+.hsub{margin-top:7px;font-size:14px;font-weight:500;color:#6b7684}
+.hright{display:flex;align-items:center;gap:22px}
+.spy{display:flex;align-items:center;gap:0}
+.spy-item{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:#b0b8c1;transition:color .25s}
+.spy-item.on{color:#0064FF;font-weight:700}
+.spy-dot{width:9px;height:9px;border-radius:50%;background:#dbe1e8;transition:all .25s}
+.spy-item.on .spy-dot{background:#0064FF;box-shadow:0 0 0 4px #0064ff26}
+.spy-line{width:26px;height:2px;background:#e6eaef;margin:0 12px;border-radius:2px}
+.hdiv{width:1px;height:26px;background:#e6eaef}
+.pvbtn{display:flex;align-items:center;gap:8px;height:44px;padding:0 18px;border:1px solid #dbe7ff;border-radius:12px;background:#eef4ff;color:#0064FF;font-family:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:background .12s}
+.pvbtn:hover{background:#e2edff}
+.pvbtn svg{width:17px;height:17px}
+.scrollarea{flex:1;overflow-y:auto;padding:14px 64px 118px}
+.scrollarea::-webkit-scrollbar{width:9px}.scrollarea::-webkit-scrollbar-thumb{background:#dfe4ea;border-radius:5px}.scrollarea::-webkit-scrollbar-thumb:hover{background:#d0d7df}
+.formwrap{max-width:980px;margin:0 auto}
+.formcard{background:#fff;border:1px solid #eef1f5;border-radius:24px;box-shadow:0 22px 60px -26px #10357522,0 3px 12px #1035750d;padding:38px 44px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.stack{display:flex;flex-direction:column}
+.sec{display:flex;align-items:center;gap:11px;margin:0 0 22px}
+.sec.mt{margin-top:36px;padding-top:32px;border-top:1px solid #f1f3f6}
+.sec-ico{width:30px;height:30px;border-radius:9px;background:#eef4ff;color:#0064FF;display:flex;align-items:center;justify-content:center}
+.sec-ico svg{width:17px;height:17px}
+.sec-t{font-size:16px;font-weight:800;color:#191F28;letter-spacing:-.01em}
+.sec-en{font-size:12px;font-weight:700;color:#c0c7ce;letter-spacing:.02em;text-transform:uppercase}
+.field{margin-bottom:22px}
+.field:last-child{margin-bottom:0}
+.flabel{display:flex;align-items:center;gap:4px;font-size:14px;font-weight:700;color:#333d4b;margin-bottom:11px}
+.req{color:#FF3B30;font-weight:800}
+.finput{width:100%;height:52px;border:1px solid #e1e6ec;border-radius:12px;padding:0 16px;font-size:15px;font-weight:600;color:#191F28;font-family:inherit;background:#fff;transition:border-color .12s,box-shadow .12s}
+.finput::placeholder{color:#b0b8c1;font-weight:500}
+.finput:focus{outline:none;border-color:#0064FF;box-shadow:0 0 0 3px #0064ff22}
+.ftext{width:100%;flex:1;min-height:196px;border:1px solid #e1e6ec;border-radius:12px;padding:14px 16px;font-size:14.5px;font-weight:500;color:#191F28;font-family:inherit;resize:none;line-height:1.5}
+.ftext:focus{outline:none;border-color:#0064FF;box-shadow:0 0 0 3px #0064ff22}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip-opt{height:41px;padding:1px 16px 0;border:1px solid #dbe1e8;border-radius:11px;background:#fff;font-size:14px;font-weight:700;color:#4e5968;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .12s}
+.chip-opt:hover{border-color:#b9c2cc}
+.chip-opt.on{background:#191F28;border-color:#191F28;color:#fff}
+.chip-opt.on:hover{border-color:#191F28}
+.chips-dur{gap:10px}
+.custgroup{display:inline-flex;align-items:center;gap:8px;flex-wrap:nowrap}
+.custdur{display:inline-flex;align-items:center;gap:8px}
+.custmin{height:42px;width:98px;padding:0 12px}
+.custmin-suf{font-size:14px;font-weight:700;color:#4e5968;flex-shrink:0}
+.sechelp{margin:2px 0 22px;padding:13px 16px;background:#f7f9fc;border:1px solid #eef1f5;border-radius:12px;font-size:13px;font-weight:500;color:#5a6472;line-height:1.65}
+.field-sep{margin-top:16px}
+.acmenu{position:absolute;top:calc(100% + 7px);left:0;right:0;background:#fff;border:1px solid #eef1f5;border-radius:14px;box-shadow:0 16px 38px -10px #10357544,0 3px 10px #1035751a;padding:7px;z-index:22;max-height:250px;overflow-y:auto}
+.acitem{display:flex;align-items:center;gap:12px;padding:9px 11px;border-radius:11px;cursor:pointer;transition:background .1s}
+.acitem:hover{background:#f4f6f8}
+.pav2.sm{width:32px;height:32px;font-size:12px}
+.acadd{margin-left:auto;font-size:12px;font-weight:700;color:#0064FF;background:#eef4ff;padding:6px 11px;border-radius:8px;flex-shrink:0}
+.acnomatch{padding:16px;text-align:center;font-size:13px;font-weight:500;color:#b0b8c1}
+.placewrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.placein{flex:1;min-width:150px;height:44px;border:1px solid #e1e6ec;border-radius:11px;padding:0 15px;font-size:14.5px;font-weight:600;color:#191F28;font-family:inherit;background:#fff;transition:border-color .12s,box-shadow .12s}
+.placein::placeholder{color:#b0b8c1;font-weight:500}
+.placein:focus{outline:none;border-color:#0064FF;box-shadow:0 0 0 3px #0064ff22}
+.dd{position:relative;display:inline-block}
+.dd-btn{height:44px;padding:0 12px 0 15px;border:1px solid #e1e6ec;border-radius:11px;background:#fff;font-size:14px;font-weight:700;color:#191F28;display:flex;align-items:center;gap:12px;cursor:pointer;min-width:160px;justify-content:space-between;transition:border-color .12s}
+.dd-btn:hover{border-color:#b9c2cc}
+.dd-chev{width:20px;height:20px;color:#8b95a1;flex-shrink:0;transition:transform .18s}
+.dd.open .dd-chev{transform:rotate(180deg)}
+.dd-menu{position:absolute;top:calc(100% + 7px);left:0;min-width:100%;background:#fff;border:1px solid #eef1f5;border-radius:13px;box-shadow:0 16px 38px -10px #10357544,0 3px 10px #1035751a;padding:7px;z-index:25}
+.dd-opt{padding:10px 13px;border-radius:9px;font-size:14px;font-weight:600;color:#333d4b;cursor:pointer;white-space:nowrap;transition:background .1s}
+.dd-opt:hover{background:#f4f6f8}
+.dd-opt.on{background:#eef4ff;color:#0064FF;font-weight:700}
+.dd-backdrop{position:fixed;inset:0;z-index:20}
+.check{display:flex;align-items:center;gap:11px;cursor:pointer;padding:2px 0}
+.cbox{width:22px;height:22px;border-radius:7px;border:1.5px solid #d3d9e0;background:#fff;display:flex;align-items:center;justify-content:center;transition:all .12s}
+.cbox.on{background:#0064FF;border-color:#0064FF}
+.cbox svg{width:13px;height:13px;opacity:0}
+.cbox.on svg{opacity:1}
+.check-lab{font-size:14.5px;font-weight:600;color:#333d4b}
+.check-sub{font-size:13px;font-weight:500;color:#8b95a1}
+.recurrow{display:flex;align-items:center;gap:11px;margin-bottom:13px}
+.recur-lab{font-size:13px;font-weight:600;color:#8b95a1}
+.wdchips{display:flex;flex-wrap:wrap;gap:7px}
+.wd{width:44px;height:44px;border:1px solid #dbe1e8;border-radius:11px;background:#fff;font-size:14px;font-weight:700;color:#4e5968;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s}
+.wd:hover{border-color:#b9c2cc}
+.wd.on{background:#0064FF;border-color:#0064FF;color:#fff}
+.cal{border:1px solid #eef1f5;border-radius:16px;padding:15px 15px 13px;background:#fff}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px}
+.cal-title{font-size:14px;font-weight:800;color:#191F28}
+.cal-navs{display:flex;gap:4px;color:#c0c7d0}
+.cal-navs svg{width:17px;height:17px}
+.cal-wd{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:3px}
+.cal-wd span{text-align:center;font-size:11px;font-weight:700;color:#b0b8c1;height:22px;line-height:22px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-d{height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#333d4b;cursor:pointer;border:none;background:transparent;font-family:inherit;transition:background .1s}
+.cal-d:hover{background:#f2f5f8}
+.cal-d.on{background:#0064FF;color:#fff;font-weight:800}
+.cal-d.empty{visibility:hidden;cursor:default}
+.seldates{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.seldate{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 6px 0 13px;background:#eef4ff;border:1px solid #dbe7ff;border-radius:10px;font-size:13px;font-weight:700;color:#0064FF}
+.seldate-x{width:22px;height:22px;border-radius:7px;border:none;background:#dbe7ff;color:#0064FF;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .1s}
+.seldate-x:hover{background:#c3daff}
+.seldate-x svg{width:11px;height:11px}
+.selempty{margin-top:13px;font-size:13px;font-weight:500;color:#b0b8c1}
+.monthhint{margin-top:12px;font-size:12.5px;font-weight:500;color:#8b95a1;line-height:1.5}
+.hint{margin-top:11px;font-size:12.5px;font-weight:500;color:#8b95a1}
+.slider{padding:26px 16px 8px;border:1px solid #eef1f5;border-radius:14px;background:#fbfcfe}
+.strack{position:relative;height:6px;border-radius:4px;background:#e6e9ee}
+.sfill{position:absolute;top:0;height:6px;border-radius:4px;background:#0064FF}
+.shandle{position:absolute;top:50%;width:22px;height:22px;border-radius:50%;background:#fff;border:2.5px solid #0064FF;box-shadow:0 3px 8px #0064ff44;transform:translate(-50%,-50%);cursor:grab}
+.shandle:active{cursor:grabbing}
+.sval{position:absolute;top:-32px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:800;color:#0064FF;white-space:nowrap;background:#eef4ff;padding:4px 9px;border-radius:7px}
+.sticks{display:flex;justify-content:space-between;margin-top:16px}
+.stk{font-size:11px;font-weight:600;color:#adb5bd}
+.calbtn{width:100%;height:50px;border:1px solid #e1e6ec;border-radius:12px;background:#fff;padding:0 15px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:inherit;transition:border-color .12s}
+.calbtn:hover{border-color:#b9c2cc}
+.calbtn .cv{display:flex;align-items:center;gap:9px;font-size:14.5px;font-weight:700;color:#191F28;white-space:nowrap}
+.calbtn .cv svg{width:16px;height:16px;color:#0064FF}
+.calbtn .car{width:18px;height:18px;color:#8b95a1;flex-shrink:0}
+.dlpop{margin-top:10px;border:1px solid #eef1f5;border-radius:16px;box-shadow:0 18px 44px -20px #10357533;padding:15px;background:#fff}
+.searchbox{position:relative;margin-bottom:14px}
+.searchbox input{width:100%;height:50px;border:1px solid #e1e6ec;border-radius:12px;padding:0 16px 0 44px;font-size:14px;font-weight:500;font-family:inherit;color:#191F28}
+.searchbox input::placeholder{color:#b0b8c1}
+.searchbox input:focus{outline:none;border-color:#0064FF;box-shadow:0 0 0 3px #0064ff22}
+.searchbox .si{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#adb5bd;width:17px;height:17px}
+.plist2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.prow{display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid #eef1f5;border-radius:14px;background:#fff}
+.prow.host{background:#f7faff;border-color:#e3ecfa}
+.pav2{width:38px;height:38px;border-radius:50%;color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pinfo{flex:1;min-width:0}
+.pname{font-size:14px;font-weight:700;color:#191F28;display:flex;align-items:center;gap:7px}
+.pdept{font-size:12px;font-weight:500;color:#8b95a1;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pbadge2{font-size:10.5px;font-weight:700;color:#8b95a1;background:#fff;border:1px solid #e1e6ec;padding:2px 7px;border-radius:5px}
+.seg{display:inline-flex;padding:3px;background:#f1f3f6;border-radius:9px;gap:2px}
+.segbtn{border:none;background:transparent;padding:6px 12px;border-radius:7px;font-family:inherit;font-size:12px;font-weight:700;color:#8b95a1;cursor:pointer;transition:all .15s}
+.segbtn.on{background:#191F28;color:#fff}
+.rolelock{padding:6px 12px;font-size:12px;font-weight:700;color:#0064FF;background:#eef4ff;border-radius:8px}
+.pdel{width:30px;height:30px;border-radius:9px;border:none;background:transparent;color:#b0b8c1;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pdel svg{width:14px;height:14px}
+.pdel:hover{background:#fff0f0;color:#FF3B30}
+.pcount{margin-top:14px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#4e5968;background:#f7f8fa;border-radius:12px;padding:14px 16px}
+.pcount .pi{width:22px;height:22px;border-radius:50%;background:#e6eefc;color:#0064FF;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pcount .pi svg{width:13px;height:13px}
+.pcount b{color:#0064FF;font-weight:800}
+.footer{position:absolute;left:0;right:0;bottom:0;z-index:35;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 64px 26px;background:linear-gradient(180deg,#fbfcfe00,#fbfcfe 34%)}
+.footer-info{font-size:13px;font-weight:500;color:#8b95a1}
+.footer-info b{color:#4e5968;font-weight:700}
+.btns{display:flex;gap:12px}
+.btn-ghost{height:54px;padding:0 30px;border:1px solid #e1e6ec;border-radius:15px;background:#fff;color:#4e5968;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;transition:all .12s}
+.btn-ghost:hover{background:#f7f8fa;border-color:#d3d9e0}
+.btn-primary{height:54px;padding:0 34px;border:none;border-radius:15px;background:#0064FF;color:#fff;font-family:inherit;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 12px 26px -8px #0064ff88;transition:transform .12s,box-shadow .12s}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 16px 32px -8px #0064ff99}
+.pvtab{position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:30;display:flex;flex-direction:column;align-items:center;gap:8px;background:#fff;border:1px solid #eef1f5;border-right:none;border-radius:15px 0 0 15px;box-shadow:-8px 0 24px -14px #10357544;padding:16px 11px;cursor:pointer;color:#0064FF;transition:padding-right .15s,opacity .2s}
+.pvtab:hover{padding-right:15px}
+.pvtab.hide{opacity:0;pointer-events:none}
+.pvtab svg{width:18px;height:18px}
+.pvtab .pvtab-t{writing-mode:vertical-rl;font-size:12.5px;font-weight:700;letter-spacing:.04em}
+.scrim{position:absolute;inset:0;background:#10192a00;z-index:40;transition:background .3s;pointer-events:none}
+.scrim.on{background:#10192a3d;pointer-events:auto}
+.drawer{position:absolute;top:0;right:0;height:100%;width:450px;background:#fff;box-shadow:-24px 0 60px -20px #10357544;z-index:41;transform:translateX(100%);transition:transform .34s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.drawer.on{transform:translateX(0)}
+.drawer-h{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:24px 26px 18px;border-bottom:1px solid #f1f3f6}
+.drawer-title{font-size:16.5px;font-weight:800;color:#191F28}
+.drawer-sub{font-size:12.5px;color:#8b95a1;margin-top:4px;font-weight:500;line-height:1.5}
+.drawer-x{width:36px;height:36px;border-radius:10px;border:none;background:#f4f6f8;color:#4e5968;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.drawer-x:hover{background:#eaedf1}
+.drawer-x svg{width:15px;height:15px}
+.drawer-body{flex:1;overflow-y:auto;padding:24px 26px 30px;background:linear-gradient(180deg,#f7faff,#fbfdff)}
+.pv-eyebrow{display:inline-flex;font-size:11px;font-weight:700;color:#8b95a1;background:#fff;border:1px solid #eef1f5;padding:5px 11px;border-radius:999px}
+.pv-head{margin-top:14px;font-size:19px;font-weight:800;letter-spacing:-.02em;color:#191F28;line-height:1.35}
+.pv-head b{color:#0064FF}
+.pv-mini{margin-top:20px;background:#fff;border:1px solid #eef1f5;border-radius:14px;box-shadow:0 14px 34px -18px #10357533;padding:16px}
+.pv-mt-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.pv-mt{font-size:14px;font-weight:800;color:#191F28;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pv-chip{flex-shrink:0;padding:4px 9px;border-radius:7px;font-size:11px;font-weight:700}
+.pv-chip.decision{background:#FBEAE7;color:#C6483A}.pv-chip.brainstorm{background:#fff3e3;color:#d97706}.pv-chip.share{background:#e9f7ef;color:#0f9d58}.pv-chip.review{background:#f2eefb;color:#7c53d4}
+.pv-grid{display:flex;border:1px solid #eef1f5;border-radius:10px;overflow:hidden}
+.pv-tcol{width:34px;flex-shrink:0;border-right:1px solid #eef1f5}
+.pv-tc-h{height:28px;border-bottom:1px solid #eef1f5;background:#fafbfc}
+.pv-tc{height:22px;font-size:8.5px;font-weight:600;color:#c0c7ce;text-align:right;padding-right:5px;line-height:22px}
+.pv-dcol{flex:1;border-right:1px solid #eef1f5}
+.pv-dcol:last-child{border-right:none}
+.pv-dh{height:28px;background:#fafbfc;border-bottom:1px solid #eef1f5;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.pv-dh-d{font-size:10px;font-weight:800;color:#333d4b;line-height:1.1}
+.pv-dh-n{font-size:7.5px;font-weight:600;color:#b0b8c1;line-height:1.1}
+.pv-gc{height:22px;border-bottom:1px solid #f4f6f8}
+.pv-gc.a{background:#85B7EB}.pv-gc.p{background:#0064FF}.pv-gc.b{background:#E7E9EE}
+.pv-legend{display:flex;gap:16px;margin-top:12px;justify-content:center}
+.pv-lg{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:#8b95a1}
+.pv-sw{width:12px;height:12px;border-radius:3px}
+.pv-sw.p{background:#0064FF}.pv-sw.a{background:#85B7EB}.pv-sw.b{background:#E7E9EE}
+.pv-meta{margin-top:18px;background:#fff;border:1px solid #eef1f5;border-radius:14px;padding:6px 16px}
+.pv-ln{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #f4f6f8;font-size:13px;font-weight:600;color:#8b95a1}
+.pv-ln:last-child{border-bottom:none}
+.pv-ln svg{width:15px;height:15px;color:#8b95a1;flex-shrink:0}
+.pv-ln b{color:#333d4b;font-weight:700;margin-left:auto}
+</style>
+</helmet>
+<div class="frame {{ rootCls }}" data-screen-label="회의 만들기 통합">
+<div class="aurora"><div class="a-bloom"></div><div class="a-bloom2"></div><div class="a-veil"></div></div>
+<div class="stage">
+<div class="hdr"><div><div class="htitle">회의 만들기</div><div class="hsub">참여자 선호와 필수 여부를 반영해 가장 몰입하기 좋은 회의 시간을 찾을 수 있어요.</div></div><div class="hright"><div class="spy"><span class="{{ step1Cls }}"><span class="spy-dot"></span>회의 정보</span><span class="spy-line"></span><span class="{{ step2Cls }}"><span class="spy-dot"></span>일정</span><span class="spy-line"></span><span class="{{ step3Cls }}"><span class="spy-dot"></span>참여자</span></div></div></div>
+<div class="scrollarea" ref="{{ scrollRef }}" onScroll="{{ onScroll }}"><div class="formwrap"><div class="formcard">
+<div class="sec" ref="{{ secInfoRef }}"><span class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z"></path><path d="M13 3v6h6"></path><path d="M9 13h6M9 17h4"></path></svg></span><span class="sec-t">회의 정보</span><span class="sec-en">What</span></div>
+<div class="field"><div class="flabel">회의명<span class="req">*</span></div><input class="finput" value="{{ meetingName }}" onChange="{{ setMeetingName }}" placeholder="회의 이름을 입력하세요"></div>
+<div class="field"><div class="flabel">회의 목적<span class="req">*</span></div><div class="chips"><sc-for list="{{ purposes }}" as="p" hint-placeholder-count="4"><button class="{{ p.cls }}" onClick="{{ p.pick }}">{{ p.name }}</button></sc-for></div></div>
+<div class="grid2">
+<div class="field stack"><div class="flabel">안건<span class="req">*</span></div><textarea class="ftext" placeholder="회의에서 다룰 안건을 적어주세요">신규 유저 온보딩 개선안 확정 및 개선 우선순위 결정</textarea></div>
+<div>
+<div class="field"><div class="flabel">회의 시간<span class="req">*</span></div><div class="chips chips-dur"><sc-for list="{{ durations }}" as="d" hint-placeholder-count="5"><button class="{{ d.cls }}" onClick="{{ d.pick }}">{{ d.name }}</button></sc-for><span class="custgroup"><button class="{{ customBtnCls }}" onClick="{{ pickCustom }}">Custom</button><sc-if value="{{ isCustom }}" hint-placeholder-val="{{ false }}"><span class="custdur"><input class="finput custmin" type="number" value="{{ customMin }}" onChange="{{ setCustom }}" placeholder="예: 180"><span class="custmin-suf">분</span></span></sc-if></span></div></div>
+<div class="field"><div class="flabel">장소<span class="req">*</span></div><div class="placewrap"><button class="{{ placeOff }}" onClick="{{ pickOffline }}">대면</button><button class="{{ placeOn }}" onClick="{{ pickOnline }}">화상</button><sc-if value="{{ isOnline }}" hint-placeholder-val="{{ true }}"><div class="{{ ddCls }}"><button class="dd-btn" onClick="{{ toggleDD }}"><span>{{ onlineTool }}</span><svg class="dd-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{ ddOpen }}" hint-placeholder-val="{{ false }}"><div class="dd-menu"><sc-for list="{{ tools }}" as="t" hint-placeholder-count="3"><div class="{{ t.cls }}" onClick="{{ t.pick }}">{{ t.name }}</div></sc-for></div></sc-if></div></sc-if><sc-if value="{{ isOffline }}" hint-placeholder-val="{{ false }}"><input class="placein" value="{{ offlineRoom }}" onChange="{{ setRoom }}" placeholder="회의실 1"></sc-if></div></div>
+</div>
+</div>
+<div class="sec mt" ref="{{ secWhenRef }}"><span class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2.5"></rect><path d="M3.5 9.5h17M8 3v4M16 3v4"></path></svg></span><span class="sec-t">일정</span><span class="sec-en">When</span></div>
+<div class="field"><label class="check" onClick="{{ toggleRepeat }}"><span class="{{ repeatBox }}"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path></svg></span><span><span class="check-lab">반복 회의</span> <span class="check-sub">· 정해진 주기로 회의가 반복돼요</span></span></label></div>
+<div class="sechelp">{{ sechelpText }}</div>
+<div class="grid2">
+<div class="field"><div class="flabel">{{ openLabel }}<span class="req">*</span></div>
+<sc-if value="{{ isRepeat }}" hint-placeholder-val="{{ false }}"><div class="recurrow"><span class="recur-lab">반복 주기</span><div class="{{ recurDdCls }}"><button class="dd-btn" onClick="{{ toggleRecurDD }}"><span>{{ recurrence }}</span><svg class="dd-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{ recurDdOpen }}" hint-placeholder-val="{{ false }}"><div class="dd-menu"><sc-for list="{{ recurOpts }}" as="r" hint-placeholder-count="2"><div class="{{ r.cls }}" onClick="{{ r.pick }}">{{ r.name }}</div></sc-for></div></sc-if></div></div></sc-if>
+<sc-if value="{{ showWeekly }}" hint-placeholder-val="{{ false }}"><div class="wdchips"><sc-for list="{{ weekdayOpts }}" as="w" hint-placeholder-count="7"><button class="{{ w.cls }}" onClick="{{ w.pick }}">{{ w.name }}</button></sc-for></div></sc-if>
+<sc-if value="{{ showCalendar }}" hint-placeholder-val="{{ true }}"><div class="cal"><div class="cal-h"><span class="cal-title">2026년 7월</span><span class="cal-navs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></span></div><div class="cal-wd"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="cal-grid"><sc-for list="{{ calCells }}" as="c" hint-placeholder-count="35"><button class="{{ c.cls }}" onClick="{{ c.pick }}">{{ c.label }}</button></sc-for></div></div></sc-if>
+<sc-if value="{{ showChips }}" hint-placeholder-val="{{ true }}"><sc-if value="{{ hasSelDates }}" hint-placeholder-val="{{ true }}"><div class="seldates"><sc-for list="{{ selDates }}" as="s" hint-placeholder-count="4"><span class="seldate">{{ s.label }}<button class="seldate-x" onClick="{{ s.remove }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></span></sc-for></div></sc-if><sc-if value="{{ showMonthlyHelper }}" hint-placeholder-val="{{ false }}"><div class="monthhint">해당 일자가 없는 달은 말일에 열려요.</div></sc-if></sc-if></div>
+<div>
+<div class="field"><div class="flabel">후보 시간대<span class="req">*</span></div><div class="slider"><div class="strack" ref="{{ trackRef }}"><div class="sfill" style="left:{{ fillLeft }}%;width:{{ fillWidth }}%"></div><div class="shandle" style="left:{{ startPct }}%" onMouseDown="{{ downStart }}"><span class="sval">{{ startLabel }}</span></div><div class="shandle" style="left:{{ endPct }}%" onMouseDown="{{ downEnd }}"><span class="sval">{{ endLabel }}</span></div></div><div class="sticks"><span class="stk">00</span><span class="stk">06</span><span class="stk">12</span><span class="stk">18</span><span class="stk">24</span></div></div></div>
+<div class="field field-sep"><div class="flabel">조율 마감<span class="req">*</span></div><button class="calbtn" onClick="{{ toggleDl }}"><span class="cv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2.5"></rect><path d="M3.5 9.5h17M8 3v4M16 3v4"></path></svg>{{ deadlineLabel }}</span><svg class="car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{ dlOpen }}" hint-placeholder-val="{{ false }}"><div class="dlpop"><div class="cal-h"><span class="cal-title">2026년 7월</span><span class="cal-navs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></span></div><div class="cal-wd"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="cal-grid"><sc-for list="{{ dlCells }}" as="c" hint-placeholder-count="35"><button class="{{ c.cls }}" onClick="{{ c.pick }}">{{ c.label }}</button></sc-for></div></div></sc-if><div class="hint">마감 전까지 참여자가 응답할 수 있어요.</div></div>
+</div>
+</div>
+<div class="sec mt" ref="{{ secWhoRef }}"><span class="sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20"></path><circle cx="10" cy="8" r="3.2"></circle><path d="M20 20v-1.4a3.4 3.4 0 0 0-2.6-3.3M15.5 5.2a3.2 3.2 0 0 1 0 5.6"></path></svg></span><span class="sec-t">참여자</span><span class="sec-en">Who</span></div>
+<div class="field"><div class="flabel">참여자 초대<span class="req">*</span></div><div class="searchbox"><svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4-4"></path></svg><input value="{{ search }}" onChange="{{ setSearch }}" placeholder="이름 또는 부서로 검색해 초대하세요"><sc-if value="{{ showAc }}" hint-placeholder-val="{{ false }}"><div class="acmenu"><sc-for list="{{ matches }}" as="m" hint-placeholder-count="3"><div class="acitem" onClick="{{ m.add }}"><span class="pav2 sm" style="{{ m.avStyle }}">{{ m.initial }}</span><div class="pinfo"><div class="pname">{{ m.name }}</div><div class="pdept">{{ m.dept }}</div></div><span class="acadd">+ 추가</span></div></sc-for></div></sc-if><sc-if value="{{ showNoMatch }}" hint-placeholder-val="{{ false }}"><div class="acmenu"><div class="acnomatch">검색 결과가 없어요</div></div></sc-if></div>
+<div class="plist2"><div class="prow host"><span class="pav2" style="background:#0064FF">조</span><div class="pinfo"><div class="pname">조윤아<span class="pbadge2">주최</span></div><div class="pdept">프로덕트 · PO</div></div><span class="rolelock">필수</span></div><sc-for list="{{ people }}" as="p" hint-placeholder-count="5"><div class="prow"><span class="pav2" style="{{ p.avStyle }}">{{ p.initial }}</span><div class="pinfo"><div class="pname">{{ p.name }}</div><div class="pdept">{{ p.dept }}</div></div><div class="seg"><button class="{{ p.reqCls }}" onClick="{{ p.setReq }}">필수</button><button class="{{ p.optCls }}" onClick="{{ p.setOpt }}">선택</button></div><button class="pdel" onClick="{{ p.del }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div></sc-for></div>
+<div class="pcount"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>참여자 <b>{{ count }}명</b> · 주최자 포함 <b>총 {{ total }}명</b>이 조율에 참여해요.</div>
+</div>
+</div></div></div>
+<div class="footer"><div class="footer-info">총 <b>{{ total }}명</b> 참여 · {{ candLabel }} <b>{{ footerCand }}</b> · 조율 마감 <b>{{ deadlineLabel }}</b></div><div class="btns"><button class="btn-ghost">취소</button><button class="btn-primary" onClick="{{ onStart }}">회의 조율 시작 →</button></div></div>
+</div>
+<button class="{{ tabCls }}" onClick="{{ openDrawer }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg><span class="pvtab-t">미리보기</span></button>
+<div class="{{ scrimCls }}" onClick="{{ closeDrawer }}"></div>
+<div class="{{ drawerCls }}">
+<div class="drawer-h"><div><div class="drawer-title">참여자에게 보이는 화면</div><div class="drawer-sub">참여자는 아래처럼 시간대를 선택하는 화면을 받아요.</div></div><button class="drawer-x" onClick="{{ closeDrawer }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+<div class="drawer-body">
+<span class="pv-eyebrow">시간 선택 · 참여자</span>
+<div class="pv-head">가능한 시간을 <b>그리드에서 표시</b>해요</div>
+<div class="pv-mini"><div class="pv-mt-row"><span class="pv-mt">{{ meetingName }}</span><span class="{{ pvChipCls }}">{{ purpose }}</span></div>
+<div class="pv-grid"><div class="pv-tcol"><div class="pv-tc-h"></div><sc-for list="{{ pvTimes }}" as="t" hint-placeholder-count="6"><div class="pv-tc">{{ t }}</div></sc-for></div><sc-for list="{{ pvCols }}" as="col" hint-placeholder-count="4"><div class="pv-dcol"><div class="pv-dh"><span class="pv-dh-d">{{ col.d }}</span><span class="pv-dh-n">{{ col.n }}</span></div><sc-for list="{{ col.cells }}" as="c" hint-placeholder-count="6"><div class="{{ c }}"></div></sc-for></div></sc-for></div>
+<div class="pv-legend"><span class="pv-lg"><i class="pv-sw p"></i>선호</span><span class="pv-lg"><i class="pv-sw a"></i>가능</span><span class="pv-lg"><i class="pv-sw b"></i>일정 있음</span></div></div>
+<div class="pv-meta"><div class="pv-ln"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2.5"></rect><path d="M3.5 9.5h17M8 3v4M16 3v4M9 15l2 2 4-4"></path></svg>{{ candLabel }}<b>{{ pvCand }}</b></div><div class="pv-ln"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>후보 시간대<b>{{ startLabel }}–{{ endLabel }}</b></div><div class="pv-ln"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2.5"></rect><path d="M3.5 9.5h17M8 3v4M16 3v4"></path></svg>조율 마감<b>{{ deadlineLabel }}</b></div><div class="pv-ln"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20"></path><circle cx="10" cy="8" r="3.2"></circle></svg>참여 인원<b>총 {{ total }}명</b></div><div class="pv-ln"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v8M8 12h8"></path><circle cx="12" cy="12" r="9"></circle></svg>회의 시간<b>{{ durLabel }}</b></div></div>
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;auroraTone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;blue&quot;,&quot;violet&quot;,&quot;mist&quot;],&quot;default&quot;:&quot;blue&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Atmosphere&quot;}}">
+class Component extends DCLogic {
+  constructor(p){ super(p); this.scrollRef=React.createRef(); this.trackRef=React.createRef(); this.secInfoRef=React.createRef(); this.secWhenRef=React.createRef(); this.secWhoRef=React.createRef(); }
+  state = {
+    meetingName:'온보딩 전환율 개선 TFT 킥오프',
+    purpose:'결정', duration:'1시간', customMin:'',
+    online:true, offlineRoom:'', onlineTool:'Google Meet', openDD:null,
+    repeat:false, recurrence:'매주', recurDD:false,
+    weekdays:['월','화','수','목','금'], openDates:[20,21,22,23,24],
+    start:9, end:18, dragH:null, deadline:17, dlOpen:false,
+    search:'',
+    directory:[
+      {id:1,name:'김민준',dept:'ICT 개발본부 · 웹기획팀',initial:'김',color:'#4b93ff'},
+      {id:2,name:'박서연',dept:'ICT 개발본부 · UX디자인팀',initial:'박',color:'#7b61ff'},
+      {id:3,name:'박준형',dept:'서비스기획본부 · 플랫폼팀',initial:'박',color:'#22c55e'},
+      {id:4,name:'최지우',dept:'서비스기획본부 · 프로덕트팀',initial:'최',color:'#f59e0b'},
+      {id:5,name:'정하은',dept:'마케팅본부 · CRM팀',initial:'정',color:'#ec4899'},
+      {id:6,name:'김지민',dept:'ICT 개발본부 · 서버개발팀',initial:'김',color:'#0ea5e9'},
+      {id:7,name:'김도윤',dept:'서비스기획본부 · 데이터팀',initial:'김',color:'#14b8a6'},
+      {id:8,name:'이한결',dept:'마케팅본부 · 브랜드팀',initial:'이',color:'#f43f5e'},
+      {id:9,name:'박서진',dept:'ICT 개발본부 · QA팀',initial:'박',color:'#8b5cf6'}
+    ],
+    added:[{id:1,role:'req'},{id:4,role:'req'},{id:2,role:'opt'},{id:3,role:'opt'},{id:5,role:'opt'}],
+    drawer:false, activeStep:1
+  };
+  WD=['월','화','수','목','금','토','일'];
+
+  componentDidMount(){ this._move=(e)=>this.onMove(e); this._up=()=>{ if(this.state.dragH) this.setState({dragH:null}); }; window.addEventListener('mousemove',this._move); window.addEventListener('mouseup',this._up); }
+  componentWillUnmount(){ window.removeEventListener('mousemove',this._move); window.removeEventListener('mouseup',this._up); }
+  onMove(e){ if(!this.state.dragH||!this.trackRef.current) return; const r=this.trackRef.current.getBoundingClientRect(); const sc=r.width/((this.props&&0)||r.width); let h=Math.round((e.clientX-r.left)/r.width*24); h=Math.max(0,Math.min(24,h)); if(this.state.dragH==='start') this.setState(s=>({start:Math.min(h,s.end-1)})); else this.setState(s=>({end:Math.max(h,s.start+1)})); }
+
+  onScroll(e){ const el=e.target; const line=el.getBoundingClientRect().top+160; const when=this.secWhenRef.current, who=this.secWhoRef.current; let a=1; if(when&&when.getBoundingClientRect().top<=line) a=2; if(who&&who.getBoundingClientRect().top<=line) a=3; if(el.scrollTop+el.clientHeight>=el.scrollHeight-4) a=3; if(a!==this.state.activeStep) this.setState({activeStep:a}); }
+
+  toggleMulti(key,val,max){ this.setState(s=>{ const arr=s[key]; if(arr.includes(val)) return {[key]:arr.filter(x=>x!==val)}; if(arr.length>=max) return {}; return {[key]:[...arr,val]}; }); }
+  setRole(id,role){ this.setState(s=>({added:s.added.map(a=>a.id===id?{...a,role}:a)})); }
+  del(id){ this.setState(s=>({added:s.added.filter(a=>a.id!==id)})); }
+  addPerson(id){ this.setState(s=>({ added:s.added.some(a=>a.id===id)?s.added:[...s.added,{id,role:'req'}], search:'' })); }
+  fmt(h){ return String(h).padStart(2,'0')+':00'; }
+  dayName(d){ return ['일','월','화','수','목','금','토'][new Date(2026,6,d).getDay()]; }
+  wdOrder(a,b){ return this.WD.indexOf(a)-this.WD.indexOf(b); }
+
+  renderVals(){
+    const s=this.state;
+    const pMap={'결정':'decision','정보 공유':'share','브레인스토밍':'brainstorm','리뷰':'review'};
+    const purposes=['결정','정보 공유','브레인스토밍','리뷰'].map(name=>({ name, cls:'chip-opt'+(s.purpose===name?' on':''), pick:()=>this.setState({purpose:name}) }));
+    const durations=['15분','30분','1시간','1시간 30분','2시간'].map(name=>({ name, cls:'chip-opt'+(s.duration===name?' on':''), pick:()=>this.setState({duration:name}) }));
+    const isCustom=s.duration==='Custom';
+    const durLabel=isCustom?((s.customMin?s.customMin:'—')+'분'):s.duration;
+
+    const tools=['Google Meet','Zoom','Teams'].map(name=>({ name, cls:'dd-opt'+(s.onlineTool===name?' on':''), pick:()=>this.setState({onlineTool:name,openDD:null}) }));
+    const recurOpts=['매주','매달'].map(name=>({ name, cls:'dd-opt'+(s.recurrence===name?' on':''), pick:()=>this.setState({recurrence:name,recurDD:false}) }));
+
+    const firstDow=new Date(2026,6,1).getDay();
+    const daysIn=new Date(2026,7,0).getDate();
+    const mkCells=(selArr,onPick)=>{ const cells=[]; for(let i=0;i<firstDow;i++) cells.push({cls:'cal-d empty',label:'',pick:()=>{}}); for(let d=1;d<=daysIn;d++){ const on=selArr.includes(d); cells.push({cls:'cal-d'+(on?' on':''),label:String(d),pick:()=>onPick(d)}); } return cells; };
+    const calCells=mkCells(s.openDates,(d)=>this.toggleMulti('openDates',d,5));
+    const dlCells=mkCells([s.deadline],(d)=>this.setState({deadline:d,dlOpen:false}));
+    const monthlyChips=s.repeat&&s.recurrence==='매달';
+    const selDates=[...s.openDates].sort((a,b)=>a-b).map(d=>({ label:monthlyChips?`${d}일`:`7/${d} ${this.dayName(d)}`, remove:()=>this.toggleMulti('openDates',d,5) }));
+    const weekdayOpts=this.WD.map(name=>({ name, cls:'wd'+(s.weekdays.includes(name)?' on':''), pick:()=>this.toggleMulti('weekdays',name,5) }));
+
+    const isRepeat=s.repeat;
+    const isMonthly=isRepeat&&s.recurrence==='매달';
+    const showMonthlyHelper=isMonthly&&s.openDates.some(d=>d>=29);
+    const showWeekly=isRepeat&&s.recurrence==='매주';
+    const showCalendar=!isRepeat||(isRepeat&&s.recurrence==='매달');
+    const openLabel=showWeekly?'후보 요일':'후보 일자';
+    const sechelpText=showWeekly
+      ?'참여자가 응답할 수 있는 후보 요일 최대 5개와 시간대를 설정해요.'
+      :'참여자가 응답할 수 있는 후보 일자 최대 5개와 시간대를 설정해요.';
+    const sortedDates=[...s.openDates].sort((a,b)=>a-b);
+    const nDates=sortedDates.length;
+    const dateSummaryPlain=nDates?(nDates>1?`7/${sortedDates[0]} 외 ${nDates-1}일`:`7/${sortedDates[0]}`):'미정';
+    const dateSummaryDay=nDates?(nDates>1?`7/${sortedDates[0]} ${this.dayName(sortedDates[0])} 외 ${nDates-1}일`:`7/${sortedDates[0]} ${this.dayName(sortedDates[0])}`):'미정';
+    const monthlySummary=nDates?(nDates>1?`매달 ${sortedDates[0]}일 외 ${nDates-1}개`:`매달 ${sortedDates[0]}일`):'미정';
+    const wdSummary=[...s.weekdays].sort((a,b)=>this.wdOrder(a,b)).join('·')||'미정';
+    const wdSummaryLabeled=s.weekdays.length?`매주 ${wdSummary}`:'미정';
+    const candLabel=showWeekly?'후보 요일':'후보 일자';
+    const footerCand=showWeekly?wdSummaryLabeled:(isMonthly?monthlySummary:dateSummaryPlain);
+    const pvCand=showWeekly?wdSummaryLabeled:(isMonthly?monthlySummary:dateSummaryDay);
+
+    let pvCols;
+    if(showWeekly){ pvCols=[...s.weekdays].sort((a,b)=>this.wdOrder(a,b)).map(w=>({d:w,n:''})); }
+    else if(isMonthly){ pvCols=[...s.openDates].sort((a,b)=>a-b).map(d=>({d:`${d}일`,n:''})); }
+    else { pvCols=[...s.openDates].sort((a,b)=>a-b).map(d=>({d:`7/${d} ${this.dayName(d)}`,n:''})); }
+    if(pvCols.length===0) pvCols=[{d:'—',n:''}];
+    pvCols=pvCols.slice(0,5);
+    const pat=[[0,1,0,3,1],[1,0,2,1,0],[0,2,1,0,0],[3,1,0,1,0],[0,0,2,0,1],[1,0,0,0,1]];
+    pvCols=pvCols.map((c,ci)=>({ ...c, cells:pat.map(row=>{ const v=row[ci%5]; return 'pv-gc'+(v===2?' p':v===1?' a':v===3?' b':''); }) }));
+    const pvTimes=[this.fmt(s.start).slice(0,2),'','','','',this.fmt(s.end).slice(0,2)];
+
+    const q=s.search.trim();
+    const byId=Object.fromEntries(s.directory.map(d=>[d.id,d]));
+    const people=s.added.map(a=>{ const d=byId[a.id]; return { name:d.name, dept:d.dept, initial:d.initial, avStyle:`background:${d.color}`, reqCls:'segbtn'+(a.role==='req'?' on':''), optCls:'segbtn'+(a.role==='opt'?' on':''), setReq:()=>this.setRole(a.id,'req'), setOpt:()=>this.setRole(a.id,'opt'), del:()=>this.del(a.id) }; });
+    const addedIds=new Set(s.added.map(a=>a.id));
+    const matches=q?s.directory.filter(d=>!addedIds.has(d.id)&&(d.name.includes(q)||d.dept.includes(q))).map(d=>({ name:d.name, dept:d.dept, initial:d.initial, avStyle:`background:${d.color}`, add:()=>this.addPerson(d.id) })):[];
+    const showAc=q.length>0&&matches.length>0;
+    const showNoMatch=q.length>0&&matches.length===0;
+    const total=s.added.length+1;
+    const openSummary=isRepeat?(showWeekly?[...s.weekdays].sort((a,b)=>this.wdOrder(a,b)).join('·'):`${s.openDates.length}개`):(s.openDates.length?`7/${[...s.openDates].sort((a,b)=>a-b)[0]} 외 ${s.openDates.length-1}일`:'미정');
+
+    return {
+      rootCls:`tone-${this.props.auroraTone??'blue'}`,
+      scrollRef:this.scrollRef, secInfoRef:this.secInfoRef, secWhenRef:this.secWhenRef, secWhoRef:this.secWhoRef, onScroll:(e)=>this.onScroll(e),
+      step1Cls:'spy-item'+(s.activeStep===1?' on':''), step2Cls:'spy-item'+(s.activeStep===2?' on':''), step3Cls:'spy-item'+(s.activeStep===3?' on':''),
+      meetingName:s.meetingName, setMeetingName:(e)=>this.setState({meetingName:e.target.value}),
+      purposes, durations, isCustom, customBtnCls:'chip-opt'+(isCustom?' on':''), pickCustom:()=>this.setState({duration:'Custom'}), customMin:s.customMin, setCustom:(e)=>this.setState({customMin:e.target.value}),
+      isOnline:s.online, isOffline:!s.online, placeOn:'chip-opt'+(s.online?' on':''), placeOff:'chip-opt'+(!s.online?' on':''),
+      pickOnline:()=>this.setState({online:true}), pickOffline:()=>this.setState({online:false,openDD:null}),
+      offlineRoom:s.offlineRoom, setRoom:(e)=>this.setState({offlineRoom:e.target.value}),
+      onlineTool:s.onlineTool, tools, ddOpen:s.openDD==='tool', ddCls:'dd'+(s.openDD==='tool'?' open':''), toggleDD:()=>this.setState(st=>({openDD:st.openDD==='tool'?null:'tool'})),
+      repeatBox:'cbox'+(s.repeat?' on':''), toggleRepeat:()=>this.setState(st=>({repeat:!st.repeat,recurDD:false})),
+      isRepeat, showWeekly, showCalendar, showChips:showCalendar, openLabel, sechelpText, candLabel, footerCand, pvCand,
+      recurrence:s.recurrence, recurOpts, recurDdOpen:s.recurDD, recurDdCls:'dd'+(s.recurDD?' open':''), toggleRecurDD:()=>this.setState(st=>({recurDD:!st.recurDD,dlOpen:false})),
+      weekdayOpts, calCells, selDates, hasSelDates:s.openDates.length>0, noSelDates:s.openDates.length===0, showMonthlyHelper,
+      trackRef:this.trackRef, startPct:s.start/24*100, endPct:s.end/24*100, fillLeft:s.start/24*100, fillWidth:(s.end-s.start)/24*100,
+      startLabel:this.fmt(s.start), endLabel:this.fmt(s.end), downStart:()=>this.setState({dragH:'start'}), downEnd:()=>this.setState({dragH:'end'}),
+      deadlineLabel:`7/${s.deadline} ${this.dayName(s.deadline)}`, dlOpen:s.dlOpen, toggleDl:()=>this.setState(st=>({dlOpen:!st.dlOpen,recurDD:false})), dlCells,
+      search:s.search, setSearch:(e)=>this.setState({search:e.target.value}), people, matches, showAc, showNoMatch, count:s.added.length, total, openSummary,
+      openDrawer:()=>this.setState({drawer:true}), closeDrawer:()=>this.setState({drawer:false}),
+      drawerCls:'drawer'+(s.drawer?' on':''), scrimCls:'scrim'+(s.drawer?' on':''), tabCls:'pvtab'+(s.drawer?' hide':''),
+      purpose:s.purpose, pvChipCls:'pv-chip '+(pMap[s.purpose]||'decision'), pvCols, pvTimes, durLabel,
+      onStart:()=>{ window.location.href = 'transition1-participant-push.dc.html'; }
+    };
+  }
+}
+</script>
+</body>
+</html>

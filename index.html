@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fastly.jsdelivr.net"><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Pretendard','Pretendard Variable',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}a{color:#6aa6ff;text-decoration:none}a:hover{color:#8bbaff}
+html,body{min-width:1440px;background:#080A0F}
+.frame{width:1440px;height:900px;position:relative;overflow:hidden;background:#080A0F;color:#EAEEF6;margin:0 auto}
+.aurora{position:absolute;inset:0;pointer-events:none}
+.a-grid{position:absolute;inset:0;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(120% 80% at 50% 0%,#000 20%,transparent 70%);-webkit-mask-image:radial-gradient(120% 80% at 50% 0%,#000 20%,transparent 70%)}
+.a-bloom{position:absolute;left:50%;top:-360px;transform:translateX(-50%);width:1500px;height:720px;border-radius:50%;background:radial-gradient(50% 60% at 50% 50%,#2f6bff 0%,#1746b8 34%,#0b2467 60%,transparent 82%);filter:blur(60px);opacity:.55}
+.a-bloom2{position:absolute;right:6%;bottom:-260px;width:640px;height:560px;border-radius:50%;background:radial-gradient(circle,#1b3fa855,transparent 70%);filter:blur(70px)}
+.a-veil{position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 0%,transparent 40%,#080A0Fcc 100%)}
+.stage{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 132px}
+.col{max-width:920px}
+.pill{display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border-radius:999px;background:#ffffff0d;border:1px solid #ffffff1a;font-size:13.5px;font-weight:600;color:#aeb8c8;backdrop-filter:blur(6px)}
+.pdot{width:7px;height:7px;border-radius:50%;background:#4b93ff;box-shadow:0 0 0 4px #4b93ff33}
+.title{margin-top:30px;font-size:56px;line-height:1.24;font-weight:800;letter-spacing:-.03em;color:#F4F7FC;text-wrap:balance}
+.accent{color:#5b9dff}
+.sub{margin-top:24px;font-size:17px;line-height:1.72;font-weight:500;color:#9aa5b6;max-width:none;white-space:nowrap}
+.sub b{color:#c3ccda;font-weight:600}
+.rule{margin:40px 0 26px;height:1px;width:100%;max-width:720px;background:linear-gradient(90deg,#ffffff1f,transparent)}
+.how{display:flex;align-items:center;justify-content:center;gap:12px;max-width:none}
+.how-ico{flex-shrink:0;width:34px;height:34px;border-radius:10px;background:#ffffff0d;border:1px solid #ffffff14;display:flex;align-items:center;justify-content:center;color:#7fa8e6}
+.how-ico svg{width:18px;height:18px}
+.how-t{font-size:15.5px;line-height:1.7;font-weight:500;color:#aab4c4;white-space:nowrap}
+.how-t b{color:#dfe6f0;font-weight:700}
+.cta-wrap{margin-top:44px}
+.cta{display:inline-flex;align-items:center;gap:11px;height:60px;padding:0 34px;border-radius:16px;background:#0064FF;color:#fff;font-size:17px;font-weight:700;letter-spacing:-.01em;box-shadow:0 16px 40px -12px #0064ffaa,inset 0 1px 0 #ffffff30;transition:transform .14s ease,box-shadow .14s ease}
+.cta:hover{transform:translateY(-2px);color:#fff;box-shadow:0 22px 50px -12px #0064ffcc,inset 0 1px 0 #ffffff30}
+.cta .arw{transition:transform .18s ease}
+.cta:hover .arw{transform:translateX(4px)}
+.help{margin-top:16px;font-size:13.5px;font-weight:500;color:#727d8e}
+.badge{position:absolute;right:132px;top:64px;display:flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;color:#6a7484}
+.badge .bd{width:6px;height:6px;border-radius:50%;background:#3a4658}
+.flowmini{position:absolute;left:132px;bottom:60px;display:flex;align-items:center;gap:11px;font-size:12.5px;font-weight:600}
+.fm{display:flex;align-items:center;gap:8px;color:#6b7686}
+.fm-dot{width:22px;height:22px;border-radius:7px;background:#ffffff0a;border:1px solid #ffffff14;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#8b96a8}
+.fm-dot.hl{background:#0064ff22;border-color:#0064ff55;color:#7fb0ff}
+.fm-line{width:20px;height:1px;background:#2a3444}
+.fm-cap{color:#5a6474}</style></helmet><div class="frame" data-screen-label="Hub"><div class="aurora"><div class="a-grid"></div><div class="a-bloom" style="opacity: 0.2"></div><div class="a-bloom2"></div><div class="a-veil"></div></div><div class="stage"><div class="col"><span class="pill"><span class="pdot"></span>회의 시간 조율 · 프로토타입</span><h1 class="title">되는 시간이 아니라,<br><span class="accent">몰입되는</span> 시간을 찾습니다</h1><p class="sub">기존 도구는 <b>'누가 되는지'</b>만 찾습니다. 하지만 참여자가 선호하지 않는 시간에 회의를 진행하면 회의의 질이 떨어집니다.<br>이 도구는 역할(필수·선택)과 선호를 반영한 <b>'몰입도'</b>로 가장 집중도 높은 시간을 찾습니다.</p><div class="rule"></div><div class="how" style="justify-content: flex-start"><span class="how-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg></span><p class="how-t">이 프로토타입은 하나의 회의가 만들어지고 확정되기까지의 <b>전체 흐름</b>을 주최자와 참여자 시점에서 순서대로 보여줍니다.</p></div><div class="cta-wrap"><a class="cta" href="flow2-screen1-create-form.dc.html">흐름 시작하기<span class="arw">→</span></a><div class="help">주최자 화면부터 순서대로 흐름을 확인할 수 있어요.</div></div></div></div><div class="badge" style="left: 1065.94px"><span class="bd"></span>Toss Product Designer Challenge 2026</div><div class="flowmini"><span class="fm"><span class="fm-dot hl">1</span><span class="fm-cap">주최자 생성</span></span><span class="fm-line"></span><span class="fm"><span class="fm-dot">2</span><span class="fm-cap">참여자 응답</span></span><span class="fm-line"></span><span class="fm"><span class="fm-dot">3</span><span class="fm-cap">주최자 확정</span></span></div></div>
+</x-dc>
+</body>
+</html>

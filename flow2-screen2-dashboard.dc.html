@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fastly.jsdelivr.net">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard','Pretendard Variable',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{min-width:1440px;background:#FBFCFE}
+a{color:#0064FF;text-decoration:none}a:hover{color:#0052cc}
+.frame{width:1440px;height:900px;position:relative;overflow:hidden;background:#FBFCFE;margin:0 auto}
+.aurora{position:absolute;inset:0;pointer-events:none}
+.a-bloom{position:absolute;left:50%;bottom:-500px;transform:translateX(-50%);width:1600px;height:720px;border-radius:50%;background:radial-gradient(50% 60% at 50% 60%,#ffffff 0%,#e4eeff 40%,#a9c8ff 68%,#4d8bff 88%,transparent 100%);filter:blur(70px);opacity:.3}
+.a-veil{position:absolute;inset:0;background:linear-gradient(180deg,#fbfcfef7 0%,#fbfcfee6 46%,#fbfcfebb 100%)}
+.stage{position:absolute;inset:0;display:flex;flex-direction:column;padding:28px 44px 26px}
+.dhead{background:#fff;border:1px solid #eef1f5;border-radius:20px;box-shadow:0 18px 50px -28px #10357522,0 2px 10px #1035750d;padding:20px 26px;display:flex;align-items:stretch;justify-content:space-between;gap:28px;margin-bottom:20px}
+.dh-info{display:flex;flex-direction:column;gap:12px;min-width:0}
+.dh-title{display:flex;align-items:center;gap:11px}
+.dh-name{font-size:23px;font-weight:800;letter-spacing:-.02em;color:#191F28}
+.chip{padding:5px 11px;border-radius:8px;font-size:12.5px;font-weight:700}
+.chip.p-decision{background:#FBEAE7;color:#C6483A}
+.chip.p-brainstorm{background:#FFF1E3;color:#D9772E}
+.chip.p-info{background:#E7F6ED;color:#1E9E5A}
+.chip.p-review{background:#F0ECFB;color:#7A5AF0}
+.dh-meta{display:flex;align-items:center;gap:13px;font-size:13.5px;font-weight:600;color:#6b7684;white-space:nowrap;flex-wrap:wrap}
+.mi{display:flex;align-items:center;gap:6px}
+.mi svg{width:15px;height:15px;color:#adb5bd}
+.sep{width:1px;height:12px;background:#e6eaef}
+.placelink{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;color:#4e5968}
+.gm{width:22px;height:22px;border-radius:6px;background:#f1f3f6;display:flex;align-items:center;justify-content:center;color:#8b95a1}
+.gm svg{width:13px;height:13px}
+.linkbtn{width:34px;height:34px;border-radius:9px;border:1px solid #eef1f5;background:#fff;display:flex;align-items:center;justify-content:center;color:#8b95a1;cursor:pointer;transition:all .12s}
+.linkbtn:hover{background:#f7f8fa;color:#4e5968;border-color:#e1e6ec}
+.linkbtn svg{width:15px;height:15px}
+.dh-status{display:flex;align-items:center;gap:24px;padding-left:26px;border-left:1px solid #eef1f5;flex-shrink:0}
+.respbox{display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.resp-num{font-size:27px;font-weight:800;color:#191F28;letter-spacing:-.02em;line-height:1}
+.resp-num b{color:#0064FF}
+.resp-unit{font-size:13px;font-weight:700;color:#8b95a1;margin-left:3px}
+.miss-row{display:flex;align-items:center;gap:9px}
+.miss-chip{font-size:12px;font-weight:700;color:#e08600;background:#fff4e2;padding:4px 9px;border-radius:7px}
+.miss-names{font-size:12.5px;font-weight:600;color:#8b95a1}
+.miss-req{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:26px;padding:2px 12px 0 10px;border:1px solid #f0d59a;border-radius:7px;background:#fffaf0;color:#c67c00;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:all .12s}
+.miss-req:hover{background:#fff3dd;border-color:#e9c684}
+.miss-req svg{width:13px;height:13px}
+.body{flex:1;display:flex;gap:22px;min-height:0}
+.leftcol{flex:42 1 0;display:flex;flex-direction:column;gap:14px;min-height:0}
+.col-h{display:flex;flex-direction:column;gap:4px;margin-top:9px;margin-bottom:3px}
+.col-subrow{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.col-t{font-size:16.5px;font-weight:800;color:#191F28;letter-spacing:-.01em;position:relative;left:7px;top:5px}
+.col-sub{font-size:12.5px;font-weight:500;color:#8b95a1;line-height:1.45;min-width:0;position:relative;left:7px;top:5px}
+.miwrap{position:relative;flex-shrink:0;top:5px}
+.mibtn{display:flex;align-items:center;gap:5px;padding:5px 11px;border:1px solid #edf0f4;border-radius:999px;background:transparent;color:#8b95a1;font-family:inherit;font-size:12px;font-weight:600;cursor:help;transition:all .12s}
+.mibtn:hover{background:#f5f7fa;color:#6b7684}
+.mibtn svg{width:13px;height:13px;color:#c4ccd4}
+.mibox{display:none;position:absolute;right:0;top:calc(100% + 8px);z-index:15;width:300px;padding:14px 15px;background:#191F28;border-radius:12px;box-shadow:0 16px 40px -10px #10357555}
+.miwrap:hover .mibox{display:block}
+.mibox p{font-size:12.5px;font-weight:500;color:#dfe3e8;line-height:1.6}
+.mibox p+p{margin-top:8px}
+.mibox b{color:#8fbaff;font-weight:700}
+.bcards{display:flex;flex-direction:column;gap:11px;flex:0 1 auto;min-height:0;justify-content:flex-start}
+.bcard{background:#fff;border:1px solid #eef1f5;border-radius:15px;padding:13px 16px;box-shadow:0 10px 26px -22px #10357522;display:flex;flex-direction:column}
+.bcard.top1{box-shadow:0 14px 32px -22px #1035752e,0 2px 8px #1035750d}
+.bcard.fallback{border-color:#FF8000;background:#FFFFFF}
+.bc-top{display:flex;align-items:center;justify-content:space-between}
+.bc-when{display:flex;align-items:center;gap:9px}
+.rankbadge{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:800;letter-spacing:-.01em}
+.rankbadge{gap:8px;font-size:13.5px}
+.medal{width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 7px -1px #00000033,inset 0 1px 1.5px #ffffffb0}
+.medal svg{width:17px;height:17px;color:#fff;filter:drop-shadow(0 1px 1px #0000002e)}
+.rb1{color:#996B0A}.rb1 .medal{background:linear-gradient(145deg,#F6CF63,#B9861F)}
+.rb2{color:#4E5663}.rb2 .medal{background:linear-gradient(145deg,#BFC7D3,#767F8D)}
+.rb3{color:#8F5528}.rb3 .medal{background:linear-gradient(145deg,#DF9F68,#A2652F)}
+.bc-datetime{font-size:16.5px;font-weight:800;color:#191F28;letter-spacing:-.01em}
+.bc-pct{text-align:right;line-height:1}
+.bc-pct .pv{font-size:25px;font-weight:800;color:#0064FF;letter-spacing:-.02em}
+.safe-pill{display:inline-flex;align-items:center;gap:6px;margin-top:6px;padding:5px 10px;border-radius:8px;background:#eefaf2;color:#0f9d58;font-size:12px;font-weight:700}
+.safe-pill svg{width:13px;height:13px}
+.warn-row{display:flex;align-items:center;gap:10px;margin-top:6px}
+.warn-pill{display:flex;flex:1;align-items:center;gap:6px;padding:5px 10px;border-radius:8px;background:#FFF4E2;color:#EE7700;font-size:12px;font-weight:700}
+.warn-pill svg{width:14px;height:14px}
+.warn-count{font-size:12.5px;font-weight:600;color:#6b7684}
+.bc-ev{margin-top:8px;display:flex;flex-direction:column;gap:7px}
+.ev{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:#6b7684}
+.ev-tx{min-width:0}
+.ev-ck{width:14px;height:14px;color:#3aab6d;flex-shrink:0}
+.ev-ck.warn{color:#EE7700}
+.ev-dot{width:5px;height:5px;border-radius:50%;background:#c4ccd4;flex-shrink:0;margin:0 4px}
+.confirm-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:9px;font-size:12.5px}
+.cl-label{font-weight:500;color:#6b7684}
+.cl-item{display:inline-flex;align-items:center;gap:5px}
+.role-chip{font-weight:700;color:#5b6472;background:#eef1f5;padding:1px 7px;border-radius:6px;flex-shrink:0}
+.role-meta{font-weight:500;color:#8b95a1}
+.cl-status{font-weight:500;color:#8b95a1}
+.mini-req{padding:2px 10px;border:1px solid #cfe0ff;border-radius:999px;background:#fff;color:#0064FF;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .12s}
+.mini-req:hover{background:#f4f8ff;border-color:#0064FF}
+.cl-sep{color:#ccd3db;font-weight:700}
+.pname{font-weight:600;color:#333d4b;cursor:pointer;border-radius:4px;padding:0 2px;transition:all .12s}
+.pname:hover{color:#0064FF;background:#eef4ff;text-decoration:underline}
+.bc-confirm{width:100%;height:40px;margin-top:10px;border:1.5px solid #b9d4ff;border-radius:11px;background:#fff;color:#0064FF;font-family:inherit;font-size:13.5px;font-weight:700;cursor:pointer;transition:all .12s}
+.bc-confirm:hover{background:#f4f8ff;border-color:#0064FF}
+.bc-actions{display:flex;gap:9px;margin-top:8px}
+.bc-actions .bc-confirm{margin-top:0;flex:1}
+.bc-req{flex:1;height:40px;border:1px solid #cfe0ff;border-radius:11px;background:#eef4ff;color:#0064FF;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .12s;display:flex;align-items:center;justify-content:center;gap:6px}
+.bc-req:hover{background:#e2edff;border-color:#b9d3ff}
+.bc-req svg{width:16px;height:16px;color:#0064FF}
+.global-cta{flex-shrink:0;margin-top:14px;height:46px;border:1px solid #cfe0ff;border-radius:12px;background:#eef4ff;color:#0064FF;font-family:inherit;font-size:13.5px;font-weight:700;cursor:pointer;transition:all .12s;display:flex;align-items:center;justify-content:center;gap:8px}
+.global-cta:hover{background:#e2edff;border-color:#b9d3ff;color:#0064FF}
+.global-cta svg{width:16px;height:16px;color:#0064FF}
+.rightcol{flex:58 1 0;display:flex;flex-direction:column;min-height:0}
+.gcard{flex:1;background:#fff;border:1px solid #eef1f5;border-radius:20px;box-shadow:0 18px 50px -30px #10357522,0 2px 10px #1035750d;padding:20px 22px;display:flex;flex-direction:column;min-height:0}
+.gc-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:10px}
+.gc-headL{display:flex;align-items:center;gap:12px;min-width:0}
+.gc-title{font-size:15.5px;font-weight:800;color:#191F28;letter-spacing:-.01em}
+.viewsel{display:flex;align-items:center;gap:10px}
+.dd-pre{font-size:12.5px;font-weight:600;color:#8b95a1;margin-right:2px}
+.dd{position:relative}
+.dd-btn{display:flex;align-items:center;gap:6px;height:34px;width:150px;padding:0 12px;border:1px solid #e1e6ec;border-radius:9px;background:#fff;font-family:inherit;font-size:13px;font-weight:700;color:#333d4b;cursor:pointer;transition:all .12s}
+.dd-btn:hover{border-color:#cfd6de}
+.dd-btn svg{width:14px;height:14px;color:#adb5bd;margin-left:auto}
+.dd-menu{position:absolute;top:calc(100% + 6px);right:0;z-index:22;min-width:180px;background:#fff;border:1px solid #eef1f5;border-radius:12px;box-shadow:0 16px 40px -12px #10357540,0 3px 10px #1035751a;padding:6px;display:flex;flex-direction:column;gap:2px}
+.dd-opt{display:flex;align-items:center;height:36px;padding:0 12px;border:none;background:transparent;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;color:#333d4b;cursor:pointer;text-align:left;transition:background .12s}
+.dd-opt:hover{background:#f7f8fa}
+.dd-opt.on{background:#eef4ff;color:#0064FF;font-weight:700}
+.tag{font-size:10.5px;font-weight:700;padding:2px 6px;border-radius:5px;margin-left:6px}
+.tag.req{background:#eef4ff;color:#0064FF}
+.tag.opt{background:#f1f3f6;color:#6b7684}
+.dd-miss{font-size:10.5px;font-weight:700;color:#e08600;background:#fff4e2;padding:2px 7px;border-radius:5px;margin-left:auto}
+.gc-legend{display:flex;align-items:center;justify-content:flex-end;gap:14px;margin-bottom:12px}
+.lg{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:#4e5968}
+.sw{width:14px;height:14px;border-radius:4px}
+.sw.pref{background:#0064FF}
+.sw.avl{background:#85B7EB}
+.sw.bsy{background:#E7E9EE}
+.heatbar{width:48px;height:12px;border-radius:4px;background:linear-gradient(90deg,#eff5ff,#0064FF)}
+.sw-acc{width:14px;height:14px;border-radius:4px;background:#eef2f6;box-shadow:inset 0 0 0 2px #00489A}
+.pop-backdrop{position:absolute;inset:0;z-index:20}
+.gridwrap{flex:1;display:flex;user-select:none;border:1px solid #eef1f4;border-radius:12px;overflow:hidden;min-height:0}
+.timecol{width:52px;flex-shrink:0;display:flex;flex-direction:column;border-right:1px solid #eef1f4}
+.thead{height:34px;flex-shrink:0}
+.tlabel{flex:1;position:relative;font-size:11px;font-weight:600;color:#adb5bd;text-align:right;padding-right:8px}
+.tlabel span{position:absolute;top:-7px;right:8px}
+.daycol{flex:1;display:flex;flex-direction:column;border-right:1px solid #eef1f4}
+.daycol:last-child{border-right:none}
+.ghead{height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center;gap:5px;background:#fafbfc;border-bottom:1px solid #eef1f4}
+.gh-day{font-size:12.5px;font-weight:700;color:#333d4b}
+.gh-date{font-size:12.5px;font-weight:700;color:#333d4b}
+.gcell{position:relative;flex:1;border-bottom:1px solid #f1f3f6;display:flex;align-items:center;justify-content:center;font-size:13.5px;font-weight:800;color:#4e5968}
+.gcell.e1{background:#eff5ff;color:#5b7fb5}
+.gcell.e2{background:#d3e4ff;color:#2f5fb0}
+.gcell.e3{background:#a7c9ff;color:#1a4694}
+.gcell.e4{background:#5b9bff;color:#fff}
+.gcell.e5{background:#0064FF;color:#fff}
+.gcell.pref{background:#0064FF;color:#fff}
+.gcell.avl{background:#85B7EB;color:#fff}
+.gcell.busy{background:#E7E9EE;color:transparent;cursor:help}
+.gcell.blank{background:#fff;cursor:pointer}
+.gscore{line-height:1}
+.cmedal{position:relative;width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;clip-path:polygon(50% 1%,63% 34%,99% 35%,71% 58%,80% 94%,50% 72%,20% 94%,29% 58%,1% 35%,37% 34%);filter:drop-shadow(0 1px 1.5px #00000024)}
+.cmedal::before{content:"";position:absolute;top:47%;left:50%;width:56%;height:56%;transform:translate(-50%,-50%);border-radius:50%;z-index:1;box-shadow:inset 0 0 0 1px #00000012}
+.cmn{position:relative;z-index:2;margin-top:-1px;font-size:10.5px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.cm1{background:linear-gradient(158deg,#FFD968 4%,#F3B024 96%)}
+.cm1::before{background:#FFF6DA}.cm1 .cmn{color:#B87F0C}
+.cm2{background:linear-gradient(158deg,#E3E9F0 4%,#AEB9C6 96%)}
+.cm2::before{background:#FCFDFE}.cm2 .cmn{color:#6F7E8E}
+.cm3{background:linear-gradient(158deg,#EDAE73 4%,#C67D3D 96%)}
+.cm3::before{background:#FBEAD6}.cm3 .cmn{color:#9A5828}
+.cmedal.lg{width:30px;height:30px}
+.cmedal.lg .cmn{font-size:12px}
+.rkb{display:inline-flex;flex-shrink:0;line-height:0}
+.rkb svg{width:100%;height:100%;display:block;overflow:visible}
+.rkb-lg{width:31px;height:31px}
+.rkb-sm{width:23px;height:23px}
+.rkb .ro,.rkb .rb{stroke:#191F28;stroke-width:3.6;stroke-linejoin:round;stroke-linecap:round}
+.rkb .inner{fill:#fff;stroke:#191F28;stroke-width:3.6}
+.rkb .num{fill:#191F28;font-family:'Pretendard','Pretendard Variable',sans-serif;font-weight:800;font-size:31px}
+.rk1 .ro,.rk1 .rb{fill:#F6C33F}
+.rk2 .ro,.rk2 .rb{fill:#DADFE5}
+.rk3 .ro,.rk3 .rb{fill:#C88C5C}
+.rkimg{flex-shrink:0;display:block;object-fit:contain}
+.rkimg-lg{height:37px;width:auto}
+.rkimg-sm{height:33px;width:auto;filter:drop-shadow(0 1px 2px #1035751f)}
+.gbig{font-size:18px}
+.gsc1{color:#fff}
+.gsc2{color:#FFFFFF}
+.gsc3{color:#1a4694}
+.gcell.best1 .gscore,.gcell.best2 .gscore,.gcell.best3 .gscore{position:absolute;left:50%;top:50%;transform:translate(calc(-50% + 1px),-50%)}
+.gcell.blank:hover{box-shadow:inset 0 0 0 2px #cdd5de;border-radius:3px}
+.gcell.hoverable{cursor:help}
+.gcell.best1{box-shadow:inset 0 0 0 4px #00489A;z-index:1;border-radius:3px}
+.gcell.best2{box-shadow:inset 0 0 0 3.5px #00489A;z-index:1;border-radius:3px}
+.gcell.best3{box-shadow:inset 0 0 0 3.5px #FF8000;z-index:1;border-radius:3px}
+.grid-badge{position:absolute;top:4px;left:4px;display:inline-flex;align-items:center;gap:4px;padding:3px 10px 3px 3px;background:#fff;border-radius:999px;box-shadow:0 4px 11px -2px #1035754d,0 1px 2px #10357526;z-index:4;font-size:12px;font-weight:800;letter-spacing:-.01em}
+.gm-medal{width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 1px 3px -1px #00000055,inset 0 1.5px 1.5px #ffffffd0,inset 0 -1px 2px #0000002e}
+.gm-medal svg{width:13px;height:13px;color:#fff;filter:drop-shadow(0 1px 1px #00000045)}
+.gb1{color:#8A5E00}.gb1 .gm-medal{background:linear-gradient(150deg,#FFE783 4%,#F4B92E 46%,#C6870F 100%)}
+.gb2{color:#4B5462}.gb2 .gm-medal{background:linear-gradient(150deg,#F3F6FA 4%,#B4BECC 46%,#7E8998 100%)}
+.gb3{color:#95521F}.gb3 .gm-medal{background:linear-gradient(150deg,#F7C58E 4%,#DA8B49 46%,#A55E28 100%)}
+.celltip{position:absolute;z-index:30;transform:translate(-50%,calc(-100% - 10px));background:#fff;border:1px solid #eef1f5;border-radius:12px;box-shadow:0 14px 34px -10px #10357540,0 3px 10px #1035751a;padding:11px 13px;min-width:158px;max-width:252px}
+.ct-caret{position:absolute;left:50%;bottom:-6px;transform:translateX(-50%) rotate(45deg);width:12px;height:12px;background:#fff;border-right:1px solid #eef1f5;border-bottom:1px solid #eef1f5}
+.ct-who{font-size:12px;font-weight:700;color:#8b95a1;margin-bottom:3px}
+.ct-title{font-size:13px;font-weight:800;color:#191F28;letter-spacing:-.01em}
+.ct-line{display:flex;gap:8px;font-size:12px;line-height:1.5;margin-top:6px}
+.ct-lab{flex-shrink:0;font-weight:700;color:#0064FF}
+.ct-lab.avl{color:#5f9dd6}
+.ct-val{font-weight:600;color:#4e5968}
+.ct-state{font-size:13px;font-weight:700;color:#4e5968;margin-top:6px}
+.ct-state.miss{color:#e08600}
+.ct-req{margin-top:9px;width:100%;height:32px;border:none;border-radius:8px;background:#0064FF;color:#fff;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+.ct-req:hover{background:#0056dd}
+.celltip.pop{z-index:31}
+.mreq-dim{position:absolute;inset:0;z-index:50;background:rgba(15,25,45,.42);backdrop-filter:blur(2px)}
+.mreq-wrap{position:absolute;inset:0;z-index:51;display:flex;align-items:center;justify-content:center}
+.mreq{width:468px;max-height:calc(100% - 56px);overflow:auto;background:#fff;border-radius:22px;box-shadow:0 40px 100px -30px #0a1f4a66,0 8px 24px #0a1f4a22;padding:30px 30px 24px;animation:mreqpop .3s cubic-bezier(.2,.8,.3,1.1) both}
+@keyframes mreqpop{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.mreq-badge{width:52px;height:52px;border-radius:15px;background:#eef4ff;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.mreq-badge svg{width:26px;height:26px;color:#0064FF}
+.mreq-title{font-size:21px;font-weight:800;letter-spacing:-.02em;color:#191F28}
+.mreq-sub{margin-top:8px;font-size:14px;font-weight:500;color:#6b7684;line-height:1.55}
+.mreq-card{margin-top:20px;background:#F7F8FA;border:1px solid #eef1f5;border-radius:15px;padding:18px 20px}
+.mreq-name{font-size:15.5px;font-weight:800;color:#191F28;letter-spacing:-.01em}
+.mreq-div{height:1px;background:#eceef1;margin:14px 0}
+.mreq-rows{display:flex;flex-direction:column;gap:14px}
+.mreq-row{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.mreq-lab{font-size:13px;font-weight:600;color:#8b95a1;flex-shrink:0;padding-top:3px}
+.mreq-val{font-size:14px;font-weight:700;color:#333d4b;text-align:right;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;align-items:center}
+.mreq-row-time{position:relative;background:#eaf1fe;padding:13px 20px;margin:0 -20px;border-radius:8px;align-items:center}
+.mreq-row-time::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;background:#0064FF}
+.mreq-row-time .mreq-lab{padding-top:0}
+.mreq-row-time .mreq-val{color:#0064FF;font-size:15px;font-weight:800}
+.rp{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:#fff;border:1px solid #e5eaf0;border-radius:9px;font-size:13px;font-weight:700;color:#333d4b}
+.rp-role{font-size:11px;font-weight:700;padding:1px 6px;border-radius:5px}
+.rp-role.req{background:#eef4ff;color:#0064FF}
+.rp-role.opt{background:#f1f3f6;color:#6b7684}
+.greq-block{display:flex;flex-direction:column;gap:11px}
+.greq-h{font-size:13px;font-weight:600;color:#8b95a1}
+.greq-grp{display:flex;align-items:flex-start;gap:10px}
+.greq-tag{flex-shrink:0;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:7px;margin-top:2px}
+.greq-tag.miss{background:#fff4e2;color:#e08600}
+.greq-tag.conf{background:#eef4ff;color:#0064FF}
+.greq-pills{display:flex;flex-wrap:wrap;gap:6px}
+.mreq-times{flex-direction:column;align-items:flex-end;gap:6px}
+.mreq-time-pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#4e5968;background:#fff;border:1px solid #e5eaf0;padding:5px 10px;border-radius:8px}
+.mreq-help{margin-top:14px;font-size:12.5px;font-weight:500;color:#8b95a1;line-height:1.55}
+.mreq-btns{margin-top:20px;display:flex;gap:10px}
+.mreq-cancel{flex:1;height:50px;border:1px solid #e1e6ec;border-radius:13px;background:#fff;color:#4e5968;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;transition:all .12s}
+.mreq-cancel:hover{background:#f7f8fa;border-color:#d3d9e0}
+.mreq-send{flex:1.5;height:50px;border:none;border-radius:13px;background:#0064FF;color:#fff;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 12px 26px -8px #0064ff88;transition:transform .12s;display:flex;align-items:center;justify-content:center;gap:7px}
+.mreq-send:hover{transform:translateY(-1px)}
+.mreq-send svg{width:16px;height:16px}
+.toast{position:absolute;left:50%;bottom:26px;transform:translateX(-50%) translateY(20px);z-index:40;padding:13px 20px;background:#191F28;border-radius:12px;color:#fff;font-size:13.5px;font-weight:600;box-shadow:0 16px 40px #10357544;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</helmet>
+<div class="frame" data-screen-label="회의 조율 대시보드" ref="{{ frameRef }}">
+<div class="aurora"><div class="a-bloom"></div><div class="a-veil"></div></div>
+<div class="stage">
+<div class="dhead">
+<div class="dh-info">
+<div class="dh-title"><span class="dh-name">온보딩 전환율 개선 TFT 킥오프</span><span class="{{ chipCls }}">{{ purpose }}</span></div>
+<div class="dh-meta"><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>1시간</span><span class="sep"></span><span class="placelink" style="color: #6B7684; font-weight: 600"><span class="gm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l6-3v10l-6-3z"></path><rect x="3" y="6" width="12" height="12" rx="2"></rect></svg></span>화상 · Google Meet</span><button class="linkbtn" onClick="{{ copyLink }}" title="회의 링크 복사" style="width: 26px; height: 26px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 17px; height: 16px"><path d="M9 15l6-6"></path><path d="M11 6l1-1a4 4 0 0 1 6 6l-1 1"></path><path d="M13 18l-1 1a4 4 0 0 1-6-6l1-1"></path></svg></button><sc-if value="{{ isRecurring }}" hint-placeholder-val="{{ false }}"><span class="sep"></span><span class="mi" style="color: #6B7684"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"></path><path d="M3 11v-1a4 4 0 0 1 4-4h14"></path><path d="M7 22l-4-4 4-4"></path><path d="M21 13v1a4 4 0 0 1-4 4H3"></path></svg>{{ recurLabelHeader }}</span></sc-if><span class="sep"></span><span class="mi" style="color: #6B7684"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20"></path><circle cx="10" cy="8" r="3.2"></circle><path d="M20 20v-1.4a3.4 3.4 0 0 0-2.6-3.3"></path></svg>참여자 6명</span><span class="sep"></span><span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="2.5"></rect><path d="M3.5 9.5h17M8 3v4M16 3v4"></path></svg>조율 마감 7/17 금</span></div>
+</div>
+<div class="dh-status">
+<div class="respbox"><div class="resp-num"><b>4</b> / 6<span class="resp-unit">응답</span></div><div class="miss-row"><span class="miss-chip">미응답 2명</span><span class="miss-names">박서연 · 정하은</span><button class="miss-req" onClick="{{ onMissReq }}" style="border-color: #CBD5E1; background-color: #FFFFFF; color: #475569"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3L11 14"></path><path d="M22 3l-7 19-4-8-8-4 19-7z"></path></svg>응답 요청</button></div></div>
+</div>
+</div>
+<div class="body">
+<div class="leftcol">
+<div class="col-h"><div class="col-t">추천 시간 TOP 3</div><div class="col-subrow"><div class="col-sub">필수 참여자 가능 여부와 선호도를 우선 반영했어요.</div><div class="miwrap"><button class="mibtn">몰입도순<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg></button><div class="mibox"><p><b>몰입도</b>는 필수 참여자의 가능 여부와 참여자들의 선호도를 함께 반영한 추천 점수예요.</p><p>필수 참여자가 모두 가능한 시간이 우선 추천되고, 선호 응답이 많을수록 점수가 높아져요.</p></div></div></div></div>
+<div class="bcards">
+<sc-for list="{{ bestCards }}" as="b" hint-placeholder-count="3">
+<div class="{{ b.cardCls }}">
+<div class="bc-top"><div class="bc-when"><img class="rkimg rkimg-lg" src="{{ b.imgSrc }}" alt="" style="width: 22px; height: 32px"><div class="bc-datetime">{{ b.when }}</div></div><div class="bc-pct"><div class="pv">{{ b.pct }}%</div></div></div>
+<sc-if value="{{ b.showBadge }}" hint-placeholder-val="{{ false }}"><div class="safe-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>필수 참여자 전원 가능</div></sc-if><sc-if value="{{ b.showWarn }}" hint-placeholder-val="{{ false }}"><div class="warn-row"><div class="warn-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16h.01"></path></svg>필수 참여자 3명 중 <span style="font-weight: 800">1명</span> 확인 필요</div></div></sc-if>
+<div class="bc-ev"><sc-for list="{{ b.evs }}" as="e" hint-placeholder-count="2"><div class="ev"><sc-if value="{{ e.isCheck }}" hint-placeholder-val="{{ true }}"><svg class="ev-ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></sc-if><sc-if value="{{ e.isWarn }}" hint-placeholder-val="{{ false }}"><svg class="ev-ck warn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16h.01"></path></svg></sc-if><sc-if value="{{ e.isDot }}" hint-placeholder-val="{{ false }}"><span class="ev-dot"></span></sc-if><span class="ev-tx">{{ e.text }}</span></div></sc-for></div><sc-if value="{{ b.isConfirm }}" hint-placeholder-val="{{ false }}"><div class="confirm-row"><span class="ev-dot"></span><span class="cl-label" style="font-weight: 600">확인 필요:</span><sc-for list="{{ b.missList }}" as="m" hint-placeholder-count="2"><sc-if value="{{ m.hasSep }}" hint-placeholder-val="{{ false }}"><span class="cl-sep">·</span></sc-if><span class="cl-item"><span class="pname" onClick="{{ m.onPick }}">{{ m.name }}</span><span class="role-meta">[{{ m.roleK }}]</span><button class="mini-req" onClick="{{ m.onReq }}" style="border-color: #B6D0FF">확인요청</button></span></sc-for></div></sc-if>
+<sc-if value="{{ b.isConfirm }}" hint-placeholder-val="{{ false }}"><div class="bc-actions"><button class="bc-req" onClick="{{ b.onReq }}" style="font-size: 13.5px; color: #006BFF; border-color: #ADCEFF; font-weight: 600"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3L11 14"></path><path d="M22 3l-7 19-4-8-8-4 19-7z" stroke="#006BFF"></path></svg>{{ b.reqLabel }}</button><button class="bc-confirm" onClick="{{ b.onConfirm }}">이 시간으로 확정하기</button></div></sc-if>
+<sc-if value="{{ b.isSimple }}" hint-placeholder-val="{{ true }}"><button class="bc-confirm" onClick="{{ b.onConfirm }}">이 시간으로 확정하기</button></sc-if>
+</div>
+</sc-for>
+</div>
+<button class="global-cta" onClick="{{ onGlobalReq }}" style="background-color: #FFFFFF; border-color: #D8DEE8; color: #5F6B7A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: #5F6B7A"><path d="M22 3L11 14"></path><path d="M22 3l-7 19-4-8-8-4 19-7z" stroke="#5F6B7A"></path></svg>확인 필요자 모두에게 확인 요청</button>
+</div>
+<div class="rightcol">
+<div class="gcard">
+<div class="gc-head"><div class="gc-title">시간대별 응답 현황</div><div class="viewsel"><span class="dd-pre">응답 보기:</span><div class="dd"><button class="dd-btn" onClick="{{ toggleDrop }}">{{ curName }}<sc-if value="{{ curHasTag }}" hint-placeholder-val="{{ false }}"><span class="{{ curTagCls }}">{{ curRole }}</span></sc-if><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></button><sc-if value="{{ dropOpen }}" hint-placeholder-val="{{ false }}"><div class="dd-menu"><sc-for list="{{ options }}" as="o" hint-placeholder-count="7"><button class="{{ o.cls }}" onClick="{{ o.pick }}">{{ o.name }}<sc-if value="{{ o.hasTag }}" hint-placeholder-val="{{ false }}"><span class="{{ o.tagCls }}">{{ o.role }}</span></sc-if><sc-if value="{{ o.isMiss }}" hint-placeholder-val="{{ false }}"><span class="dd-miss">미응답</span></sc-if></button></sc-for></div></sc-if></div></div></div><sc-if value="{{ isAll }}" hint-placeholder-val="{{ true }}"><div class="gc-legend"><span class="lg"><span class="heatbar"></span>몰입도 낮음 → 높음</span><span class="lg"><span class="sw-acc"></span>추천 1·2·3위</span></div></sc-if><sc-if value="{{ isIndiv }}" hint-placeholder-val="{{ false }}"><div class="gc-legend"><span class="lg"><span class="sw pref"></span>선호</span><span class="lg"><span class="sw avl"></span>가능</span><span class="lg"><span class="sw bsy"></span>일정 있음</span></div></sc-if>
+<div class="gridwrap">
+<div class="timecol"><div class="thead"></div><sc-for list="{{ times }}" as="t" hint-placeholder-count="9"><div class="tlabel"><span>{{ t }}</span></div></sc-for></div>
+<sc-for list="{{ columns }}" as="col" hint-placeholder-count="5"><div class="daycol"><div class="ghead"><span class="gh-day">{{ col.date }}</span><span class="gh-date">{{ col.day }}</span></div><sc-for list="{{ col.cells }}" as="c" hint-placeholder-count="9"><div class="{{ c.cls }}" onMouseEnter="{{ c.onEnter }}" onMouseLeave="{{ c.onLeave }}" onClick="{{ c.onClick }}"><sc-if value="{{ c.isBest }}" hint-placeholder-val="{{ false }}"><img class="rkimg rkimg-sm" src="{{ c.imgSrc }}" alt="" style="position: absolute; left: 4px; top: 5px; z-index: 4; width: 26px; height: 31px"></sc-if><span class="{{ c.scoreCls }}">{{ c.label }}</span></div></sc-for></div></sc-for>
+</div>
+</div>
+</div>
+</div>
+<sc-if value="{{ dropOpen }}" hint-placeholder-val="{{ false }}"><div class="pop-backdrop" onClick="{{ closeDrop }}"></div></sc-if>
+<sc-if value="{{ hasTip }}" hint-placeholder-val="{{ false }}"><div class="celltip" style="left:{{ tipLeft }}px;top:{{ tipTop }}px" onMouseEnter="{{ keepTip }}" onMouseLeave="{{ hideTip }}"><sc-if value="{{ tipHasWho }}" hint-placeholder-val="{{ false }}"><div class="ct-who">{{ tipWho }}</div></sc-if><div class="ct-title">{{ tipTitle }}</div><sc-for list="{{ tipLines }}" as="l" hint-placeholder-count="0"><div class="ct-line"><span class="{{ l.labCls }}">{{ l.label }}</span><span class="ct-val">{{ l.val }}</span></div></sc-for><sc-if value="{{ tipHasState }}" hint-placeholder-val="{{ false }}"><div class="{{ tipStateCls }}">{{ tipStateText }}</div></sc-if><span class="ct-caret"></span></div></sc-if>
+<sc-if value="{{ hasPop }}" hint-placeholder-val="{{ false }}"><div class="pop-backdrop" onClick="{{ closePop }}"></div><div class="celltip pop" style="left:{{ popLeft }}px;top:{{ popTop }}px"><div class="ct-who">{{ popWho }}</div><div class="ct-title">{{ popTitle }}</div><div class="ct-state miss">{{ popState }}</div><button class="ct-req" onClick="{{ popRequest }}">확인 요청</button><span class="ct-caret"></span></div></sc-if>
+<sc-if value="{{ hasReq }}" hint-placeholder-val="{{ false }}"><div class="mreq-dim" onClick="{{ closeReq }}"></div><div class="mreq-wrap" onClick="{{ closeReq }}"><div class="mreq" onClick="{{ stopReq }}"><div class="mreq-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3L11 14"></path><path d="M22 3l-7 19-4-8-8-4 19-7z"></path></svg></div><div class="mreq-title">{{ reqTitle }}</div><div class="mreq-sub">{{ reqSub }}</div><div class="mreq-card"><div class="mreq-name">온보딩 전환율 개선 TFT 킥오프</div><div class="mreq-div"></div><div class="mreq-rows"><sc-if value="{{ reqHasTimes }}" hint-placeholder-val="{{ true }}"><div class="mreq-row"><span class="mreq-lab">확인 시간</span><span class="mreq-val mreq-times"><sc-for list="{{ reqTimes }}" as="tm" hint-placeholder-count="1"><span class="mreq-time-pill">{{ tm }}</span></sc-for></span></div></sc-if><div class="mreq-row"><span class="mreq-lab">요청 대상</span><span class="mreq-val"><sc-for list="{{ reqTargets }}" as="t" hint-placeholder-count="2"><span class="rp">{{ t.name }}<span class="{{ t.roleCls }}">{{ t.roleK }}</span></span></sc-for></span></div></div></div><div class="mreq-btns"><button class="mreq-cancel" onClick="{{ closeReq }}">취소</button><button class="mreq-send" onClick="{{ sendReq }}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 3L11 14"></path><path d="M22 3l-7 19-4-8-8-4 19-7z"></path></svg>{{ reqPrimary }}</button></div></div></div></sc-if>
+<div class="toast {{ toastCls }}">{{ toastText }}</div>
+</div>
+
+</div></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;purpose&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;결정&quot;,&quot;브레인스토밍&quot;,&quot;정보 공유&quot;,&quot;리뷰&quot;],&quot;default&quot;:&quot;결정&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Meeting&quot;},&quot;recurrence&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;없음&quot;,&quot;매주&quot;,&quot;매달&quot;],&quot;default&quot;:&quot;없음&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Meeting&quot;},&quot;defaultView&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;전체&quot;,&quot;김민준&quot;,&quot;최지우&quot;,&quot;박서연&quot;,&quot;박준형&quot;,&quot;정하은&quot;],&quot;default&quot;:&quot;전체&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Grid&quot;}}">
+class Component extends DCLogic {
+  constructor(p){ super(p); this.frameRef=React.createRef(); this._tipT=null; this._toastT=null;
+    this.state={ view:(p&&p.defaultView)||'전체', dropOpen:false, tip:null, pop:null, toast:'', req:null }; }
+  openCardReq(time,targets){ this.setState({req:{kind:'card',time,targets},tip:null,pop:null}); }
+  openGlobalReq(){ this.setState({req:{kind:'global'},tip:null,pop:null}); }
+  openMissReq(){ this.setState({req:{kind:'miss',targets:[{name:'박서연',role:'opt'},{name:'정하은',role:'opt'}]},tip:null,pop:null}); }
+  closeReq(){ this.setState({req:null}); }
+  sendReq(){ const r=this.state.req; let msg='확인 요청을 보냈어요.'; if(r&&r.kind==='global')msg='확인 필요자 모두에게 요청을 보냈어요.'; else if(r&&r.kind==='miss')msg='박서연 · 정하은님에게 응답 요청을 보냈어요'; this.setState({req:null}); this.toast(msg); }
+  participants=[
+    {name:'김민준',role:'req',pref:['월-5','목-6','화-1'],avl:['수-2','금-5'],busy:{}},
+    {name:'최지우',role:'req',pref:['월-5','목-6'],avl:['수-5','목-3'],busy:{'화-1':'외부 일정'}},
+    {name:'박서연',role:'opt',pending:true,pref:[],avl:[],busy:{}},
+    {name:'박준형',role:'opt',pref:['화-1'],avl:['월-5','금-1'],busy:{'목-6':'외부 미팅'}},
+    {name:'정하은',role:'opt',pending:true,pref:[],avl:[],busy:{}}
+  ];
+  W={req:2,opt:1}; ss={pref:1,avl:0.5};
+  bestMeta=[
+    {key:'월-5',rank:1,when:'7/20 월 · 14:00–15:00',phase:1,pct:92,reqOk:3,pref:3,avl:1},
+    {key:'목-6',rank:2,when:'7/23 목 · 15:00–16:00',phase:1,reqOk:3,pref:2,avl:2,confirmList:[{name:'박준형',role:'opt'}],reqLabel:'박준형에게 확인 요청'},
+    {key:'화-1',rank:3,when:'7/21 화 · 10:00–11:00',phase:2,pct:57,reqOk:2,pref:1,avl:2,confirmList:[{name:'최지우',role:'req'},{name:'박준형',role:'opt'}],reqLabel:'최지우 외 1명에게 확인 요청'}
+  ];
+  roleK(r){ return r==='req'?'필수':'선택'; }
+  cellState(p,key){ if(p.pref.includes(key))return 'pref'; if(p.avl.includes(key))return 'avl'; if(p.busy[key])return 'busy'; return null; }
+  responded(){ return this.participants.filter(x=>!x.pending); }
+  denom(){ return this.responded().reduce((a,x)=>a+this.W[x.role],0); }
+  score(key){ let n=0; this.responded().forEach(r=>{ const s=this.cellState(r,key); if(s&&this.ss[s]) n+=this.W[r.role]*this.ss[s]; }); return n/this.denom(); }
+  bucket(p){ if(p>=.85)return ' e5'; if(p>=.7)return ' e4'; if(p>=.5)return ' e3'; if(p>=.3)return ' e2'; if(p>0)return ' e1'; return ''; }
+  namesBy(key,st){ return this.responded().filter(r=>this.cellState(r,key)===st).map(r=>r.name+' ['+this.roleK(r.role)+']'); }
+  when(day,date,i){ const h=9+i; const p=n=>String(n).padStart(2,'0'); return date+' '+day+' · '+p(h)+':00–'+p(h+1)+':00'; }
+
+  toast(t){ if(this._toastT)clearTimeout(this._toastT); this.setState({toast:t}); this._toastT=setTimeout(()=>this.setState({toast:''}),2600); }
+  toggleDrop(){ this.setState(s=>({dropOpen:!s.dropOpen})); }
+  closeDrop(){ this.setState({dropOpen:false}); }
+  pick(v){ this.setState({view:v,dropOpen:false,tip:null,pop:null}); }
+
+  showTip(e,payload){ if(!this.frameRef.current)return; if(this._tipT){clearTimeout(this._tipT);this._tipT=null;} const fr=this.frameRef.current.getBoundingClientRect(); const scale=fr.width/1440; const r=e.currentTarget.getBoundingClientRect(); const x=(r.left-fr.left+r.width/2)/scale; const y=(r.top-fr.top)/scale; this.setState({tip:{...payload,x,y}}); }
+  hideTipSoon(){ this._tipT=setTimeout(()=>this.setState({tip:null}),120); }
+  keepTip(){ if(this._tipT){clearTimeout(this._tipT);this._tipT=null;} }
+  openPop(e,payload){ if(!this.frameRef.current)return; if(this._tipT){clearTimeout(this._tipT);this._tipT=null;} const fr=this.frameRef.current.getBoundingClientRect(); const scale=fr.width/1440; const r=e.currentTarget.getBoundingClientRect(); const x=(r.left-fr.left+r.width/2)/scale; const y=(r.top-fr.top)/scale; this.setState({pop:{...payload,x,y},tip:null}); }
+  closePop(){ this.setState({pop:null}); }
+
+  renderVals(){
+    const days=[['월','7/20'],['화','7/21'],['수','7/22'],['목','7/23'],['금','7/24']];
+    const times=Array.from({length:9},(_,i)=>String(9+i).padStart(2,'0')+':00');
+    const recur=this.props.recurrence??'없음';
+    const isRecurring=recur!=='없음';
+    const wdFull={'월':'월요일','화':'화요일','수':'수요일','목':'목요일','금':'금요일','토':'토요일','일':'일요일'};
+    const recurWhen=(w)=>{ const parts=w.split(' · '); const dp=parts[0], tp=parts[1]; const seg=dp.split(' '); const date=seg[0], day=seg[1]; if(recur==='매주')return `매주 ${wdFull[day]||day} · ${tp}`; if(recur==='매달')return `매달 ${date.split('/')[1]}일 · ${tp}`; return w; };
+    const rankMap={}; this.bestMeta.forEach(b=>rankMap[b.key]=b.rank);
+    const badgeSrc={1:'assets/badge1.png',2:'assets/badge2.png',3:'assets/badge3.png'};
+    const view=this.state.view; const isAll=view==='전체';
+    const selP=isAll?null:this.participants.find(x=>x.name===view);
+
+    const columns=days.map(([d,dt])=>({ day: recur==='매달'?'':d, date: recur==='매주'?'':(recur==='매달'?(dt.split('/')[1]+'일'):dt), cells:Array.from({length:9},(_,i)=>{
+      const key=d+'-'+i; const rank=rankMap[key]; const best=rank!==undefined;
+      const whenTxt=this.when(d,dt,i);
+      if(isAll){
+        const p=this.score(key); const ov=this.bestMeta.find(m=>m.key===key); const pct=(ov&&ov.pct!=null)?ov.pct:Math.round(p*100);
+        const prefN=this.namesBy(key,'pref'), avlN=this.namesBy(key,'avl');
+        const hasContent=prefN.length||avlN.length;
+        const lines=[]; if(prefN.length)lines.push({labCls:'ct-lab',label:'선호',val:prefN.join(', ')}); if(avlN.length)lines.push({labCls:'ct-lab avl',label:'가능',val:avlN.join(', ')});
+        const payload={who:'',title:whenTxt,lines,state:'',canRequest:false};
+        return { cls:'gcell'+this.bucket(p)+(best?' best'+rank:'')+(hasContent?' hoverable':''), label:pct>0?pct+'%':'', scoreCls:'gscore'+(best?' gbig gsc'+rank:''), isBest:best, imgSrc:badgeSrc[rank], rankLabel:best?rank+'위':'', rankNum:rank, rkCls:'rk'+rank, medalCls:'cmedal cm'+rank, miniCls:'grid-badge gb'+rank,
+          onEnter:hasContent?(e)=>this.showTip(e,payload):null, onLeave:hasContent?()=>this.hideTipSoon():null, onClick:null };
+      } else {
+        let st=this.cellState(selP,key);
+        if(selP.name==='박준형'){ if(key==='화-1') st=null; else if(d==='수'&&i>=2&&i<=5) st='pref'; }
+        const pct=Math.round(this.score(key)*100);
+        const who=selP.name+' ['+this.roleK(selP.role)+']';
+        let cls='gcell', payload, isBlank=false;
+        if(st==='pref'){ cls+=' pref'; payload={who,title:whenTxt,lines:[],state:'선호',stateCls:'ct-state'}; }
+        else if(st==='avl'){ cls+=' avl'; payload={who,title:whenTxt,lines:[],state:'가능',stateCls:'ct-state'}; }
+        else if(st==='busy'){ cls+=' busy'; payload={who,title:whenTxt,lines:[],state:'일정 있음: '+selP.busy[key],stateCls:'ct-state'}; }
+        else { cls+=' blank'; isBlank=true; }
+        if(best)cls+=' best'+rank;
+        const popPayload={who,title:whenTxt,state:'응답 없음',reqName:selP.name,reqRole:selP.role};
+        return { cls, label:'', scoreCls:'gscore', isBest:best, imgSrc:badgeSrc[rank], rankLabel:best?rank+'위':'', rankNum:rank, rkCls:'rk'+rank, medalCls:'cmedal cm'+rank, miniCls:'grid-badge gb'+rank,
+          onEnter:isBlank?null:(e)=>this.showTip(e,payload), onLeave:isBlank?null:()=>this.hideTipSoon(),
+          onClick:isBlank?(e)=>this.openPop(e,popPayload):null };
+      }
+    }) }));
+
+    const bestCards=this.bestMeta.map(b=>{
+      const pct=b.pct!=null?b.pct:Math.round(this.score(b.key)*100);
+      const isConfirm=!!(b.confirmList&&b.confirmList.length);
+      const showBadge=b.phase===1;
+      const showWarn=b.phase===2;
+      const reqText=`필수 참여자 ${b.reqOk}/3 가능`;
+      const evs=[
+        {isCheck:false,isWarn:false,isDot:true,text:`선호 ${b.pref}명 · 가능 ${b.avl}명`}
+      ];
+      let missList=[],reqLabel=b.reqLabel||'',onReq=null;
+      if(isConfirm){
+        const cardTime=recurWhen(b.when);
+        missList=b.confirmList.map((c,i)=>({ name:c.name, roleK:this.roleK(c.role), hasSep:i>0, onPick:()=>this.pick(c.name), onReq:()=>this.openCardReq(cardTime,[{name:c.name,role:c.role}]) }));
+        onReq=()=>this.openCardReq(cardTime, b.confirmList.map(c=>({name:c.name,role:c.role})));
+      }
+      const cardWhen=recurWhen(b.when);
+      const confirmFile = b.rank===3 ? 'flow2-screen4-confirm-warning.dc.html' : 'flow2-screen3-confirm.dc.html';
+      return { rankLabel:b.rank+'위', rankNum:b.rank, imgSrc:badgeSrc[b.rank], rkCls:'rk'+b.rank, medalCls:'cmedal lg cm'+b.rank, when:cardWhen, pct,
+        cardCls:'bcard'+(b.rank===1?' top1':'')+(showWarn?' fallback':''), badgeCls:'rankbadge rb'+b.rank,
+        showBadge, showWarn, reqText, isConfirm, isSimple:!isConfirm, evs, missList, reqLabel, onReq,
+        onConfirm:()=>{ const qs=new URLSearchParams({time:cardWhen,pct:String(pct)}); window.location.href = confirmFile+'?'+qs.toString(); } };
+    });
+
+    const ordered=this.participants.slice().sort((a,b)=>(a.role==='req'?0:1)-(b.role==='req'?0:1));
+    const options=[{value:'전체',name:'전체',hasTag:false,cls:'dd-opt'+(isAll?' on':''),pick:()=>this.pick('전체')}].concat(
+      ordered.map(x=>({ value:x.name, name:x.name, hasTag:true, role:this.roleK(x.role), tagCls:'tag '+(x.role==='req'?'req':'opt'), isMiss:(x.name==='박서연'||x.name==='정하은'), cls:'dd-opt'+(view===x.name?' on':''), pick:()=>this.pick(x.name) })));
+
+    let curName='전체',curHasTag=false,curRole='',curTagCls='tag opt';
+    if(!isAll){ curName=selP.name; curHasTag=true; curRole=this.roleK(selP.role); curTagCls='tag '+(selP.role==='req'?'req':'opt'); }
+
+    const tip=this.state.tip;
+    const purpose=this.props.purpose??'결정';
+    const chipMap={'결정':'chip p-decision','브레인스토밍':'chip p-brainstorm','정보 공유':'chip p-info','리뷰':'chip p-review'};
+
+    const req=this.state.req;
+    const reqIsCard=!!(req&&req.kind==='card');
+    const reqIsGlobal=!!(req&&req.kind==='global');
+    const reqIsMiss=!!(req&&req.kind==='miss');
+    const confMap={}, gTimes=[];
+    this.bestMeta.forEach(b=>{ if(b.confirmList&&b.confirmList.length){ gTimes.push(recurWhen(b.when)); b.confirmList.forEach(c=>{ if(!confMap[c.name])confMap[c.name]={name:c.name,role:c.role}; }); } });
+    const gConf=Object.values(confMap).sort((a,b)=>(a.role==='req'?0:1)-(b.role==='req'?0:1)).map(c=>({ name:c.name, role:c.role }));
+    const rawTargets = reqIsGlobal ? gConf : (req&&req.targets||[]);
+    const reqTargets = rawTargets.map(t=>({ name:t.name, roleK:this.roleK(t.role), roleCls:'rp-role '+(t.role==='req'?'req':'opt') }));
+    const reqTimes = reqIsGlobal ? gTimes : (req&&req.time?[req.time]:[]);
+
+    return { frameRef:this.frameRef, purpose, chipCls:chipMap[purpose]||'chip p-decision',
+      isRecurring, recurLabelHeader: recur==='매주'?'매주 반복':(recur==='매달'?'매달 반복':''),
+      onGlobalReq:()=>this.openGlobalReq(),
+      onMissReq:()=>this.openMissReq(),
+      hasReq:!!req, reqIsCard, reqIsGlobal, reqIsMiss,
+      reqTitle: reqIsMiss?'미응답자에게 응답을 요청할까요?':(reqIsGlobal?'확인 필요자에게 요청을 보낼까요?':'확인 요청을 보낼까요?'),
+      reqSub: reqIsMiss?'아직 응답하지 않은 참여자에게 시간 응답을 요청하는 메일을 보냅니다.':(reqIsGlobal?'현재 대시보드에서 확인이 필요한 참여자들에게 한 번에 요청을 보냅니다.':'선택한 참여자에게 해당 시간 가능 여부를 확인하는 요청을 보냅니다.'),
+      reqPrimary: reqIsMiss?'응답 요청 보내기':(reqIsGlobal?'모두에게 요청 보내기':'요청 보내기'),
+      reqTimes, reqTargets, reqHasTimes:reqTimes.length>0,
+      closeReq:()=>this.closeReq(), stopReq:(e)=>e.stopPropagation(), sendReq:()=>this.sendReq(),
+      times, columns, bestCards, options,
+      isAll, isIndiv:!isAll,
+      curName, curHasTag, curRole, curTagCls,
+      dropOpen:this.state.dropOpen, toggleDrop:()=>this.toggleDrop(), closeDrop:()=>this.closeDrop(),
+      copyLink:()=>this.toast('회의 링크를 복사했어요'),
+      hasTip:!!tip, tipLeft:tip?tip.x:0, tipTop:tip?tip.y:0,
+      tipHasWho:!!(tip&&tip.who), tipWho:tip?tip.who:'', tipTitle:tip?tip.title:'',
+      tipLines:tip?tip.lines:[],
+      tipHasState:!!(tip&&tip.state), tipStateText:tip?tip.state:'', tipStateCls:tip?(tip.stateCls||'ct-state'):'ct-state',
+      keepTip:()=>this.keepTip(), hideTip:()=>this.hideTipSoon(),
+      hasPop:!!this.state.pop, popLeft:this.state.pop?this.state.pop.x:0, popTop:this.state.pop?this.state.pop.y:0,
+      popWho:this.state.pop?this.state.pop.who:'', popTitle:this.state.pop?this.state.pop.title:'', popState:this.state.pop?this.state.pop.state:'',
+      closePop:()=>this.closePop(), popRequest:()=>{ const p=this.state.pop; if(p)this.openCardReq(p.title,[{name:p.reqName,role:p.reqRole}]); },
+      toastCls:this.state.toast?'show':'', toastText:this.state.toast };
+  }
+}
+</script>
+</body>
+</html>

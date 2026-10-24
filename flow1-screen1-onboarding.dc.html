@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fastly.jsdelivr.net">
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard','Pretendard Variable',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{min-width:1440px;background:#FBFCFE}
+a{color:#0064FF;text-decoration:none}a:hover{color:#0052cc}
+.frame{width:1440px;height:900px;position:relative;overflow:hidden;background:#FBFCFE;margin:0 auto}
+.aurora{position:absolute;inset:0;pointer-events:none}
+.a-grid{position:absolute;inset:0;background-image:linear-gradient(#0064ff0d 1px,transparent 1px),linear-gradient(90deg,#0064ff0d 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(120% 90% at 50% 100%,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(120% 90% at 50% 100%,#000 30%,transparent 75%)}
+.a-bloom{position:absolute;left:50%;bottom:-340px;transform:translateX(-50%);width:1500px;height:760px;border-radius:50%;background:radial-gradient(50% 60% at 50% 60%,#ffffff 0%,#cfe2ff 34%,#5b9bff 58%,#0064ff 78%,transparent 100%);filter:blur(46px);opacity:.9}
+.a-bloom2{position:absolute;left:16%;top:-180px;width:620px;height:520px;border-radius:50%;background:radial-gradient(circle,#8fbcff88,transparent 70%);filter:blur(60px)}
+.a-bloom3{position:absolute;right:12%;top:-140px;width:560px;height:480px;border-radius:50%;background:radial-gradient(circle,#bcd4ff77,transparent 70%);filter:blur(60px)}
+.a-veil{position:absolute;inset:0;background:linear-gradient(180deg,#fbfcfeee 0%,#fbfcfe66 30%,transparent 52%)}
+.stage{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;padding-top:88px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:999px;background:#ffffffcc;border:1px solid #e5eaf1;box-shadow:0 2px 10px #0b357510;font-size:13px;font-weight:600;color:#4e5968;backdrop-filter:blur(6px)}
+.dot{width:7px;height:7px;border-radius:50%;background:#0064FF;box-shadow:0 0 0 4px #0064ff22}
+.headline{margin-top:26px;text-align:center;font-size:46px;line-height:1.28;font-weight:800;letter-spacing:-.02em;color:#191F28}
+.hl-accent{color:#0064FF}
+.subcopy{margin-top:16px;text-align:center;font-size:16px;line-height:1.6;color:#6b7684;max-width:460px;font-weight:500}
+.card{margin-top:38px;width:520px;background:#ffffff;border:1px solid #eef1f5;border-radius:22px;box-shadow:0 22px 60px -22px #10357528,0 4px 14px #10357510;padding:26px 28px}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.mtitle{font-size:22px;font-weight:800;letter-spacing:-.02em;color:#191F28;line-height:1.35}
+.chip{flex-shrink:0;padding:6px 12px;border-radius:8px;background:#eef4ff;color:#0064FF;font-size:13px;font-weight:700}
+.chip.decision{background:#FBEAE7;color:#C6483A}
+.chip.brainstorm{background:#fff3e3;color:#d97706}
+.chip.share{background:#e9f7ef;color:#0f9d58}
+.chip.review{background:#f2eefb;color:#7c53d4}
+.agenda{margin-top:10px;font-size:14px;line-height:1.55;color:#6b7684;font-weight:500}
+.divider{height:1px;background:#f1f3f6;margin:20px 0}
+.meta{display:flex;flex-direction:column;gap:14px}
+.mrow{display:flex;align-items:center;gap:12px}
+.mrow.names{align-items:flex-start}
+.mval.pills{flex-wrap:wrap;gap:6px}
+.npill{font-size:13px;font-weight:600;color:#4E5968;background:#FFFFFF;border:1px solid #E5EAF0;padding:3px 10px;border-radius:12px}
+.me-mini{font-size:10.5px;font-weight:700;color:#0064FF;background:#eef4ff;border:1px solid #cfe0ff;padding:1px 6px;border-radius:5px;margin-left:6px}
+.mlabel{width:64px;flex-shrink:0;font-size:13px;font-weight:600;color:#8b95a1}
+.mval{font-size:14px;font-weight:600;color:#333d4b;display:flex;align-items:center;gap:8px}
+.avatars{display:flex;align-items:center}
+.av{width:28px;height:28px;border-radius:50%;border:2px solid #fff;margin-left:-8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.av:first-child{margin-left:0}
+.host-tag{font-size:11px;font-weight:700;color:#8b95a1;background:#fff;border:1px solid #e1e6ec;padding:2px 7px;border-radius:6px}
+.role{margin-top:22px;width:520px;display:flex;align-items:center;justify-content:center;gap:14px;font-size:15px;font-weight:600;color:#4e5968}
+.seg{display:inline-flex;padding:4px;background:#eef1f5;border-radius:12px;gap:2px}
+.segbtn{border:none;background:transparent;padding:9px 22px;border-radius:9px;font-family:inherit;font-size:14px;font-weight:700;color:#8b95a1;cursor:pointer;transition:all .18s ease}
+.segbtn.on{background:#191F28;color:#fff;box-shadow:0 4px 12px #191f2833}
+.cta{margin-top:30px;width:520px;height:58px;border:none;border-radius:16px;background:#0064FF;color:#fff;font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 12px 28px -8px #0064ff88;transition:transform .12s ease,box-shadow .12s ease}
+.cta:hover{transform:translateY(-1px);box-shadow:0 16px 34px -8px #0064ff99}
+.cta:active{transform:translateY(0)}
+.arrow{transition:transform .18s ease}
+.cta:hover .arrow{transform:translateX(3px)}
+.toast{position:absolute;left:50%;bottom:34px;transform:translateX(-50%) translateY(20px);display:flex;align-items:center;gap:16px;padding:14px 16px 14px 20px;background:#191F28;border-radius:14px;box-shadow:0 16px 40px #10357533;opacity:0;pointer-events:none;transition:opacity .25s ease,transform .25s ease}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.toast-txt{font-size:14px;font-weight:600;color:#fff}
+.toast-undo{border:none;background:transparent;color:#6aa8ff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;padding:6px 4px}
+.toast-timer{position:absolute;left:0;bottom:0;height:3px;border-radius:0 0 0 14px;background:#6aa8ff;width:100%;transform-origin:left}
+.toast.show .toast-timer{animation:drain 5s linear forwards}
+@keyframes drain{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+</style>
+</helmet>
+<div class="frame">
+<div class="aurora"><div class="a-bloom"></div><div class="a-bloom2"></div><div class="a-bloom3"></div><div class="a-grid"></div><div class="a-veil"></div></div>
+<div class="stage">
+<div class="eyebrow"><span class="dot"></span>회의 시간 조율 · 참여자</div>
+<h1 class="headline"><span class="hl-accent">6명</span>이 가장 몰입할 수 있는<br><span class="hl-accent">1시간</span>을 찾습니다</h1>
+<p class="subcopy">아래 회의에 초대되었어요. 정보를 확인하고 가능한 시간을 알려주세요.</p>
+<div class="card">
+<div class="card-top"><div class="mtitle">온보딩 전환율 개선 TFT 킥오프</div><span class="{{ chipCls }}">{{ chipLabel }}</span></div>
+<p class="agenda">신규 유저 이탈 구간 분석 및 개선 우선순위 결정</p>
+<div class="divider"></div>
+<div class="meta">
+<div class="mrow names"><span class="mlabel">주최자</span><span class="mval pills"><span class="npill">조윤아</span></span></div>
+<div class="mrow names"><span class="mlabel">참여자</span><span class="mval pills"><span class="npill">김민준<span class="me-mini">나</span></span><span class="npill">박서연</span><span class="npill">박준형</span><span class="npill">정하은</span><span class="npill">최지우</span></span></div>
+<div class="mrow"><span class="mlabel">장소</span><span class="mval" style="color: #4E5968; padding-left: 11px">화상 · Google Meet</span></div>
+<div class="mrow"><span class="mlabel">조율 마감</span><span class="mval" style="color: #4E5968; padding-left: 11px">7/17 금</span></div>
+</div>
+</div>
+<div class="role"><span>나는</span><div class="seg"><button class="segbtn {{ reqOn }}" onClick="{{ setRequired }}">필수</button><button class="segbtn {{ optOn }}" onClick="{{ setOptional }}">선택</button></div><span>참여자예요</span></div>
+<button class="cta" onClick="{{ goNext }}">시작하기<span class="arrow">→</span></button>
+</div>
+<div class="toast {{ toastCls }}"><span class="toast-txt">{{ toastText }}</span><button class="toast-undo" onClick="{{ undo }}">되돌리기</button><span class="toast-timer"></span></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;purpose&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;결정&quot;,&quot;브레인스토밍&quot;,&quot;정보 공유&quot;,&quot;리뷰&quot;],&quot;default&quot;:&quot;결정&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Meeting&quot;}}">
+class Component extends DCLogic {
+  state = { role: 'required', prev: null, toast: false };
+  _t = null;
+  change(next){
+    const prev = this.state.role;
+    if(next===prev) return;
+    if(this._t) clearTimeout(this._t);
+    this.setState({ role: next, prev, toast: true });
+    this._t = setTimeout(()=>this.setState({toast:false}), 5000);
+  }
+  undo(){
+    if(this._t) clearTimeout(this._t);
+    this.setState(s=>({ role: s.prev ?? s.role, toast:false }));
+  }
+  renderVals(){
+    const r = this.state.role;
+    const label = r==='required' ? '필수' : '선택';
+    const purpose = this.props.purpose ?? '결정';
+    const pmap = {'결정':'decision','브레인스토밍':'brainstorm','정보 공유':'share','리뷰':'review'};
+    return {
+      reqOn: r==='required' ? 'on' : '',
+      optOn: r==='optional' ? 'on' : '',
+      setRequired: ()=>this.change('required'),
+      setOptional: ()=>this.change('optional'),
+      undo: ()=>this.undo(),
+      toastCls: this.state.toast ? 'show' : '',
+      toastText: `'${label}' 참여자로 변경했어요`,
+      chipCls: 'chip ' + (pmap[purpose] || 'decision'),
+      chipLabel: purpose,
+      goNext: ()=>{ window.location.href = 'flow1-screen2-grid.dc.html'; },
+    };
+  }
+}
+</script>
+</body>
+</html>

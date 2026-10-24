@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fastly.jsdelivr.net"><link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Pretendard','Pretendard Variable',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{min-width:1440px;background:#0A0D14}
+.frame{width:1440px;height:900px;position:relative;overflow:hidden;background:#0A0D14;color:#EAEEF6;margin:0 auto}
+.wall{position:absolute;inset:0}
+.w-g1{position:absolute;left:50%;top:-30%;transform:translateX(-50%);width:1500px;height:1000px;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,#20386e 0%,#132347 40%,#0a0f1e 72%,transparent 100%);filter:blur(30px);opacity:.9}
+.w-g2{position:absolute;right:-8%;bottom:-24%;width:820px;height:720px;border-radius:50%;background:radial-gradient(circle,#1a2b57aa,transparent 70%);filter:blur(60px)}
+.w-grain{position:absolute;inset:0;background:radial-gradient(120% 120% at 50% 30%,transparent 55%,#05070c 100%)}
+.menubar{position:absolute;top:0;left:0;right:0;height:30px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;backdrop-filter:blur(14px);background:#05070caa;font-size:12.5px;font-weight:600;color:#c3ccda;z-index:5}
+.mb-l{display:flex;align-items:center;gap:20px}
+.mb-logo{width:14px;height:14px}
+.mb-l span{font-weight:700}
+.mb-l .dim{font-weight:500;color:#8b95a6}
+.mb-r{display:flex;align-items:center;gap:16px;color:#c3ccda}
+.mb-r svg{width:15px;height:15px;opacity:.85}
+.clock{position:absolute;left:0;right:0;top:214px;text-align:center;pointer-events:none}
+.c-date{font-size:19px;font-weight:600;color:#aab4c4;letter-spacing:.01em}
+.c-time{margin-top:2px;font-size:108px;font-weight:700;letter-spacing:-.03em;color:#f1f4fa;line-height:1.05;text-shadow:0 4px 40px #00000066}
+.toast{position:absolute;right:26px;top:44px;width:390px;z-index:8;text-decoration:none;display:block;transform:translateY(0);transition:transform .16s ease,box-shadow .16s ease}
+.toast:hover{transform:translateY(-3px)}
+.card{background:#fbfcfeee;backdrop-filter:blur(24px) saturate(160%);border:1px solid #ffffff;border-radius:20px;box-shadow:0 30px 70px -18px #00000088,0 4px 14px #00000044;padding:15px 16px;position:relative;overflow:hidden}
+.toast:hover .card{box-shadow:0 40px 90px -18px #000000aa,0 0 0 1px #4b93ff55}
+.c-head{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.appico{width:26px;height:26px;border-radius:7px;background:linear-gradient(150deg,#3a8bff,#0064FF);display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px #0064ff55;flex-shrink:0}
+.appico svg{width:15px;height:15px;color:#fff}
+.appname{font-size:12.5px;font-weight:700;color:#333d4b;letter-spacing:.01em}
+.c-time-ago{margin-left:auto;font-size:11.5px;font-weight:600;color:#9aa4b2}
+.c-body{padding-right:2px}
+.c-title{font-size:15px;font-weight:800;color:#191F28;letter-spacing:-.01em}
+.c-line{margin-top:5px;font-size:13.5px;font-weight:600;color:#4e5968;line-height:1.5}
+.c-line2{margin-top:3px;font-size:13.5px;font-weight:500;color:#8b95a1;line-height:1.5}
+.c-actions{display:flex;gap:8px;margin-top:13px;padding-top:12px;border-top:1px solid #eef1f5}
+.c-act{flex:1;height:34px;border-radius:9px;background:#f2f4f7;color:#4e5968;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.c-act.primary{background:#0064FF;color:#fff}
+.hint{position:absolute;left:0;right:0;bottom:62px;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:9px;pointer-events:none;transform:translateX(-3px)}
+.hint-arrow{color:#66707f;animation:nudge 1.9s ease-in-out infinite}
+.hint-arrow svg{width:17px;height:17px}
+.hint-t{font-size:13.5px;font-weight:500;color:#7b8494;letter-spacing:.01em}
+@keyframes nudge{0%,100%{transform:translate(0,0)}50%{transform:translate(3px,-3px)}}
+.persp{position:absolute;left:26px;bottom:26px;display:flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600}
+.persp-tag{display:flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:#ffffff0d;border:1px solid #ffffff14;color:#9aa4b2;backdrop-filter:blur(6px)}
+.persp-tag b{color:#cdd5e0;font-weight:700}
+.persp-dot{width:7px;height:7px;border-radius:50%;background:#4b93ff;box-shadow:0 0 0 4px #4b93ff2e}</style></helmet><div class="frame" data-screen-label="Transition · 참여자 알림"><div class="wall"><div class="w-g1"></div><div class="w-g2"></div><div class="w-grain"><div class="hint" style="position: absolute; left: 6px; top: 689px"><span class="hint-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"></path><path d="M9 7h8v8"></path></svg></span><span class="hint-t">우측 알림의 ‘시간 선택하기’를 눌러 계속하세요</span></div></div></div><div class="menubar"><div class="mb-l"><svg class="mb-logo" viewBox="0 0 24 24" fill="#dfe6f0"><path d="M12 2l2.4 6.9L21.5 9l-5.6 4.3 2.1 7L12 16.9 6 20.3l2.1-7L2.5 9l7.1-.1z"></path></svg><span>회의 시간 조율</span><span class="dim">파일  편집  보기  창  도움말</span></div><div class="mb-r"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a7 7 0 0 1 14 0"></path><path d="M8.5 15a3.5 3.5 0 0 1 7 0"></path><circle cx="12" cy="18" r="1"></circle></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="8" width="16" height="9" rx="2"></rect><path d="M22 10v5M18 11h1"></path></svg><span>화 7월 14 오전 9:41</span></div></div><div class="clock"><div class="c-date">7월 14일 화요일</div><div class="c-time">9:41</div></div><div class="toast"><div class="card"><div class="c-head"><span class="appico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16" rx="3"></rect><path d="M3.5 9.5h17M8 3v4M16 3v4"></path></svg></span><span class="appname">회의 시간 조율</span><span class="c-time-ago">지금</span></div><div class="c-body"><div class="c-title">조윤아님이 회의에 초대했어요</div><div class="c-line">온보딩 전환율 개선 TFT 킥오프</div><div class="c-line2">가능한 시간을 알려주세요</div><div class="c-actions"><span class="c-act">나중에</span><a class="c-act primary" href="flow1-screen1-onboarding.dc.html" style="text-decoration:none">시간 선택하기</a></div></div></div></div><div class="persp"><span class="persp-tag"><span class="persp-dot"></span>현재<br><b>참여자</b> 시점 · 김민준님의 PC</span></div></div>
+</x-dc>
+</body>
+</html>
