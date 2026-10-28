@@ -9,8 +9,6 @@ A meeting scheduling solution that recommends suitable meeting times based on pa
 
 ---
 
-<br>
-
 ### Participant View
 
 Participants can mark time slots as preferred, available, or unavailable to express their scheduling preferences.
