@@ -1,39 +1,26 @@
 
-<h1 align="center">Meeting Scheduling Recommendation Product</h1>
+# Meeting Scheduling Recommendation Product
 
-<p align="center">
-  A meeting scheduling solution that recommends suitable meeting times<br>
-  based on participant availability, time preferences, and priority.
-</p>
+A meeting scheduling solution that recommends suitable meeting times based on participant availability, time preferences, and priority.
 
-<p align="center">
-  <b>Product Manager / Product Designer</b> · Solo Project · Jul 2026
-</p>
-
-<p align="center">
-  <a href="https://tosschallenge-choyoona.netlify.app/"><b>View Live Demo →</b></a>
-</p>
+**Role:** Product Manager / Product Designer · **Type:** Solo Project · **Period:** Jul 2026  
+**Output:** Functional Web Prototype  
+**Live Demo:** [Try the Prototype →](https://tosschallenge-choyoona.netlify.app/)
 
 ---
-<br>
-<h3 align="center">Participant View</h3>
-
-<p align="center">
-  Mark preferred and available time slots to share individual scheduling preferences.
-</p>
-
-<p align="center">
-  <img src="./assets/participant-view.png" width="900" alt="Participant View">
-</p>
 
 <br>
 
-<h3 align="center">Organizer View</h3>
+### Participant View
 
-<p align="center">
-  Compare the top recommended meeting times based on participant priority and preferences.
-</p>
+Participants can mark time slots as preferred, available, or unavailable to express their scheduling preferences.
 
-<p align="center">
-  <img src="./assets/organizer-view.png" width="900" alt="Organizer View">
-</p>
+![Participant View](./participant-view.png)
+
+<br>
+
+### Organizer View
+
+Organizers can compare the top recommended meeting times based on participant priority and preferences, then confirm the best option.
+
+![Organizer View](./organizer-view.png)
