@@ -1,114 +1,39 @@
-# Meeting Scheduling Recommendation Product
 
-A meeting scheduling product that recommends suitable meeting times by combining participant availability, preferred times, and priority.
+<h1 align="center">Meeting Scheduling Recommendation Product</h1>
 
-**[View Live Demo →](https://tosschallenge-choyoona.netlify.app/)**
+<p align="center">
+  A meeting scheduling solution that recommends suitable meeting times<br>
+  based on participant availability, time preferences, and priority.
+</p>
 
----
+<p align="center">
+  <b>Product Manager / Product Designer</b> · Solo Project · Jul 2026
+</p>
 
-## Overview
-
-- **Role:** Product Manager / Product Designer
-- **Type:** Solo Project
-- **Period:** Jul 2026
-- **Output:** Functional web prototype
-- **Tools:** Figma · Claude Design · Claude Code · Netlify
-
----
-
-## Problem
-
-Most scheduling tools focus on when participants are available.
-
-However, a time someone **can attend** is not always the time they **prefer**, and some participants may be more important to the meeting than others.
+<p align="center">
+  <a href="https://tosschallenge-choyoona.netlify.app/"><b>View Live Demo →</b></a>
+</p>
 
 ---
+<br>
+<h3 align="center">Participant View</h3>
 
-## Research
+<p align="center">
+  Mark preferred and available time slots to share individual scheduling preferences.
+</p>
 
-- Analyzed **4 meeting scheduling products across 5 criteria**
-- Conducted **5 user interviews** with organizers and participants
+<p align="center">
+  <img src="./assets/participant-view.png" width="900" alt="Participant View">
+</p>
 
-The research highlighted the need to distinguish **availability from preference**.
+<br>
 
----
+<h3 align="center">Organizer View</h3>
 
-## Key Insight
+<p align="center">
+  Compare the top recommended meeting times based on participant priority and preferences.
+</p>
 
-### Availability ≠ Preference
-
-Participants can indicate whether each time is:
-
-- **Preferred**
-- **Available**
-- **Unavailable / Unmarked**
-
-This allows the organizer to understand not only when people can attend, but which times work better for them.
-
----
-
-## Product Approach
-
-The recommendation combines:
-
-### Participant Priority
-- Required participant: weight **2**
-- Optional participant: weight **1**
-
-### Time Preference
-- Preferred: score **1**
-- Available: score **0.5**
-- Unavailable / Unmarked: score **0**
-
-The product compares candidate times using both participant priority and preference.
-
----
-
-## Key Product Decisions
-
-### 1. Separate Available and Preferred
-Availability and preference are collected separately so all available times are not treated equally.
-
-### 2. Distinguish Required and Optional Participants
-Required participants receive greater weight when comparing meeting times.
-
-### 3. Recommend, Not Automatically Decide
-The product recommends stronger options while keeping the final decision with the organizer.
-
-### 4. Provide Fallback Options
-When no time works perfectly for everyone, the product surfaces the strongest alternatives.
-
----
-
-## User Flow
-
-**Organizer**
-
-Create Meeting → Add Participants → Set Required / Optional → Add Candidate Times → Share Link → Review Responses → Check Recommendations → Confirm Meeting
-
-**Participant**
-
-Open Link → Review Candidate Times → Mark Preferred / Available / Unavailable → Submit
-
----
-
-## Limitations
-
-- User interviews were conducted with **5 participants**
-- Recommendation weights are rule-based and require further validation
-- The prototype has not yet been evaluated with large-scale behavioral data
-
----
-
-## Next Steps
-
-- Conduct usability testing with more users
-- Measure recommendation acceptance rate
-- Analyze when organizers override recommendations
-- Refine recommendation weights based on real usage
-
----
-
-## Live Demo
-
-**[Try the Meeting Scheduling Recommendation Product →](https://meeting-scheduling-prod.netlify.app/)**
+<p align="center">
+  <img src="./assets/organizer-view.png" width="900" alt="Organizer View">
+</p>
